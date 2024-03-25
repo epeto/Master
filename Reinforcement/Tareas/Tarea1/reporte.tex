@@ -1,0 +1,116 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Tarea 1 - Aprendizaje por refuerzo}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+\section{Ejecución de los algoritmos}
+
+\subsection{Generación de políticas y valores}
+
+Para generar los archivos que contienen tanto los valores (v*) como las políticas (pi*), se debe ejecutar el script de python: \texttt{entrenamiento.py}. Una vez que se ejecuta, se preguntará cuál algoritmo usar. Por cada algoritmo se generarán dos archivos:
+
+\begin{itemize}
+\item \texttt{politicaIP.csv}: las políticas generadas por el algoritmo de iteración de política.
+\item \texttt{valorIP.csv}: los valores calculados por el algoritmo de iteración de política.
+\item \texttt{politicaIV.csv}: las políticas generadas por el algoritmo de iteración de valor.
+\item \texttt{valorIV.csv}: valores calculados por el algoritmo de iteración de valor.
+\end{itemize}
+
+\subsection{Juego}
+
+Una vez que se han generado las políticas, se puede poner al agente a jugar. Para esto se debe ejecutar el script \texttt{juego.py} y se elige una política: la generada por iteración de valor o la generada por iteración de política.
+
+\section{Frozen lake}
+
+\subsection{Recompensa y probabilidades}
+
+En el juego de frozen lake se tiene una recompensa de -1 por cada movimiento; sin embargo, si el agente no se mueve (porque intentó avanzar hacia la pared), la recompensa será 0. Se debe calcular la recompensa promedio en cada movimiento. El agente se mueve aleatoriamente hacia 3 posibles direcciones (con la misma probabilidad a cada dirección), así que la recompensa promedio será:
+
+\begin{itemize}
+\item -1 si no le estorba ninguna pared.
+\item -2/3 si le estorba una pared.
+\item -1/3 si le estorban dos paredes.
+\end{itemize}
+
+Luego, la probabilidad de llegar al estado $s'$ dado que está en $s$ y se toma la acción $a$ es 1/3 siempre: $p(s', s, a) = 1/3$; y en algunos casos $s' = s$, si el agente intentó moverse hacia una pared.
+
+\subsection{Estados y función hash}
+
+Como se observará, los estados están representados por solo un número, el cual se calcula (segun gymnasium) como $4f+c$, donde $f$ es la fila donde se encuentra el agente y $c$ es la columna. Podría pensarse que es una función hash que mapea la posición del agente a un número. Dado el estado $s$, se puede calcular la posición del agente de la siguiente forma: $f=s/4$ y $c = s \mod 4$. La siguiente cuadrícula muestra los posibles estados, donde 0 es el estado inicial y 15 el final.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+0 & 1 & 2 & 3 \\ \hline
+4 & 5 & 6 & 7 \\ \hline
+8 & 9 & 10 & 11 \\ \hline
+12 & 13 & 14 & 15 \\ \hline
+\end{tabular}
+\end{center}
+
+\section{Gato}
+
+\subsection{Recompensa y probabilidades}
+
+Las recompensas en el juego del gato son las siguientes:
+
+\begin{itemize}
+\item 1 si gana el agente.
+\item -1 si pierde el agente.
+\item 0 si empata.
+\item 0 si llega a un estado no terminal.
+\end{itemize}
+
+Para cortar el número de estados, solamente se consideran aquellos donde va a tirar el agente. En mi caso, cuando va a tirar el jugador 1 (o el jugador $\times$, si se quiere ver con símbolos).
+
+Lo siguiente es calcular la probabilidad de llegar al siguiente estado $s'$ dado un estado $s$ y dado una acción $a$, para lo cual, tira el agente en la posición $a$ e inmediatamente tira el rival de forma aleatoria (y equiprobable) en alguna de las casillas disponibles. Por lo tanto, la probabilidad de llegar a un estado $s'$ es 1 dividido entre la cantidad de posibles sucesores dado $s$ y dado $a$: $1/|sucesores(s, a)|$.
+
+\subsection{Estados y función hash}
+
+Como se observa en los archivos, las políticas y los valores están relacionados solo con un número. Esto es porque se mapea un estado del tablero con un número, al cual llamo el ``código hash'' del tablero. Primero, se considera una casilla como un número del 0 al 8.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+0 & 1 & 2 \\ \hline
+3 & 4 & 5 \\ \hline
+6 & 7 & 8 \\ \hline
+\end{tabular}
+\end{center}
+
+Luego, se le asigna un número a cada casilla dependiendo de la ficha que tenga:
+
+\begin{itemize}
+\item 0 si está vacía.
+\item 1 si tiene una $\times$.
+\item 2 si tiene un $\circ$.
+\end{itemize}
+
+Así, la función hash se calcula de la siguiente manera: \[\sum_{i=0}^8 f(i) * 3^i\] donde $i$ es una casilla y $f(i)$ es la ficha en esa casilla. Por ejemplo, para el siguiente estado del tablero
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+ & $\times$ & $\circ$ \\ \hline
+$\circ$ & $\times$ &  \\ \hline
+ &  & $\times$ \\ \hline
+\end{tabular}
+\end{center}
+
+se tiene el código hash:
+
+$1 \cdot 3^1 + 2 \cdot 3^2 + 2 \cdot 3^3 + 1 \cdot 3^4 + 1 \cdot 3^8 = 6717$
+
+También se puede encontrar el estado del tablero dado el código hash en la misma forma en la que se calcula un número en base 3 dado un número en base 10.
+
+\end{document}
+

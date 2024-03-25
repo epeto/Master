@@ -1,0 +1,27 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Crítica al artículo: \textit{Constraint programming as an AI option}}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+El artículo comienza hablando de los inicios de la inteligencia artificial, sobre el optimismo que existía en sus inicios y cómo este optimismo pronto cayó en un largo \textit{invierno}. Después de un largo invierno, a la IA le siguió una primavera y tuvieron éxito las ramas más modernas como el \textbf{deep learning} y las redes neuronales. El problema con las redes neuronales profundas es que son susceptibles a ataques de adversarios y las pequeñas perturbaciones pueden causar resultados incorrectos.
+
+Después se habla de la programación con restricciones (y le etiqueta como el santo grial de las ciencias de la computación). Este consiste en usar la computadora para resolver problemas de satisfacción de restricciones y menciona al problema de las $n$ reinas como ejemplo. Después se mencionan las características deseables de un solucionador.
+
+Se mencionan solucionadores de programación con restricciones, como MiniZinc y Choco. Sin embargo, Prolog se utiliza como esqueleto para construir el solucionador mencionado en este artículo, el cual es Pylog.
+
+En el resto del artículo se muestra cómo crear un solucionador para un problema fijo (el de la transversal). Primero se utiliza una simple búsqueda en profundidad para encontrar una solución, después se aplica una búsqueda con heurísticas y al final se utilizan variables lógicas.
+
+Al final del artículo se muestra una aplicación del solucionador para resolver un acertijo que es similar al de Einstein.
+
+La programación con restricciones parece tener un uso muy específico: resolver problemas de satisfacción de restricciones. Una ventaja de la programación con restricciones es que el resultado siempre es correcto, contrario a lo que puede pasar con redes neuronales. Se me ocurren al menos dos desventajas: 1) la complejidad computacional crece rápidamente si el problema crece, y 2) no parece tener aplicaciones fuera de la satisfacción de restricciones, por ejemplo, para el problema de clasificar imágenes.
+
+\end{document}
+

@@ -1,0 +1,163 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Tarea 1\\Programación avanzada}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+\section{El paradigma funcional}
+
+La programación funcional puede ser vista como un estilo de programar en el cual el método básico de computación es la aplicación de funciones a argumentos. La simplicidad, la claridad y la elegancia son los objetivos clave. Promueve un estilo más abstracto de programar; en contraste con la programación imperativa que está ligada al hardware, en el sentido de que la programación está basada en la idea de cambiar los valores almacenados.
+
+\subsection{Características}
+
+\begin{itemize}
+
+\item \textbf{Programas concisos.} Debido a la naturaleza de alto nivel del estilo funcional, los programas son más concisos que en otros paradigmas. Aunque es difícil hacer una comparación objetiva, los programas escritos en el paradigma funcional suelen ser más cortos en líneas de código que los escritos en programación imperativa.
+
+\item \textbf{Sistema de tipos.} El sistema de tipos permite que los errores de incompatibilidad sean detectados automáticamente, usando un proceso sofisticado llamado \textit{inferencia de tipos}.
+
+\item \textbf{Funciones recursivas.} Los programas no triviales en el paradigma imperativo involucran cierta clase de repetición o ciclos. En la programación funcional no existen los ciclos, así que el mecanismo de repetición se logra usando funciones recursivas, las cuales están definidas en término de sí mismas.
+
+\item \textbf{Apareamiento de patrones.} Una forma de definir las funciones en el paradigma funcional es usando apareamiento de patrones (\textit{pattern matching}), en la cual una secuencia de expresiones sintácticas llamadas patrones es usada para elegir entre una secuencia de resultados del mismo tipo. Si el argumento de la función hace \textit{match}\footnote{Con hacer \textit{match} se refiere a: el argumento se ``parece'' al patrón.} con el primer patrón, se elige el primer resultado; en otro caso, si el argummento hace \textit{match} con el segundo patrón, se elige el segundo resultado, y así sucesivamente.
+
+\end{itemize}
+
+\subsection{Lenguajes más conocidos}
+
+Los lenguajes más conocidos de programación funcional son:
+
+\begin{itemize}
+
+\item Elixir
+\item Erlang
+\item Common Lisp
+\item Haskell
+\item F\#
+\item Clojure
+\item Elm
+\item Racket
+\item OCaml
+\item Idris
+\item PureScript
+
+\end{itemize}
+
+\subsection{Ventajas y desventajas}
+
+\subsubsection*{Ventajas}
+
+\begin{itemize}
+
+\item \textbf{Estructuras de datos.} La notación basada en expresiones permite que el estudio de las estructuras de datos sea presentada en una forma simple y directa, y uno puede ir más lejos describiendo y derivando algoritmos que manipulan estructuras de datos generales de lo que sería posible en un lenguaje de programación convencional.
+
+\item \textbf{Almacenamiento de funciones.} Se permite almacenar funciones en estructuras de datos.
+
+\item \textbf{Orden superior.} Los lenguajes funcionales tiene funciones de orden superior. Lo cual significa que las funciones pueden tomar funciones como argumentos y producir otras funciones como resultado.
+
+\item \textbf{Programas cortos.} Como se mencionó en las características, los programas suelen ser más cortos que en el estilo imperativo.
+
+\item \textbf{Evaluación perezosa.} Para evaluar expresiones se utiliza una técnica conocida como \textit{evaluación perezosa}, la cual se basa en la idea de que no se debe realizar un cómputo hasta que sea requerido. Esto evita cálculos innecesarios y asegura que el programa termine siempre que sea posible.
+
+\end{itemize}
+
+\subsubsection*{Desventajas}
+
+\begin{itemize}
+
+\item \textbf{Entrada y salida de datos (I/O).} La entrada y salida de datos requiere efectos secundarios, así que es inherentemente no funcional. El lenguaje de programación Haskell (por poner un ejemplo) permite leer entrada desde el teclado e imprimir salida en pantalla mediante el uso de \textit{mónadas}, pero es de la parte no funcional del lenguaje.
+
+\item \textbf{Problemas de terminología.} La programación funcional no es fácil de explicar. La programación funcional tiene su raíz en las matemáticas, así que contiene términos difíciles de entender como \textit{funciones puras} y \textit{transparencia referencial}.
+
+\item \textbf{Bases de datos.} No es recomendable usarlo para conexiones de bases de datos o servidores.
+
+\item \textbf{Estado.} Representar un estado en programación funcional no es tan intuitivo como otras operaciones funcionales. Existen formas de representar un estado en la programación funcional, pero no es tan directo como en la programación imperativa. En Haskell hay formas de representar estados usando mónadas.
+
+\end{itemize}
+
+\section{El paradigma lógico}
+
+Un programa en el paradigma lógico define datos y luego define las relaciones entre esos datos. El acto de \textit{computar} una respuesta se reemplaza por el acto de \textit{buscar} una respuesta con esos datos y sus relaciones. El lenguaje canónico con este poder es Prolog.
+
+\subsection{Características}
+
+\begin{itemize}
+
+\item \textbf{Búsqueda exhaustiva.} El programador sólo especifica los datos y Prolog busca de forma exhaustiva.
+
+\item \textbf{Hechos y reglas.} Un programa sólo consiste en una serie de hechos y una colección de reglas.
+
+\item \textbf{Consultas.} Dado un programa, un usuario puede preguntarle a un evaluador de Prolog si un hecho en particular es verdadero o falso. Si la consulta está en el conjunto de hechos entonces es verdadero de forma automática; si no, el evaluador necesita aplicar las reglas para determinar la verdad.
+
+\item \textbf{Constantes.} En un programa lógico se definen constantes y los hechos relacionan esas constantes.
+
+\end{itemize}
+
+\subsection{Lenguajes más conocidos}
+
+\begin{itemize}
+\item Prolog
+\end{itemize}
+
+\subsection{Ventajas y desventajas}
+
+\subsubsection*{Ventajas}
+
+\begin{itemize}
+\item \textbf{Escalable.} Base de conocimiento fácilmente escalable.
+
+\item \textbf{Aplicaciones.} Tiene aplicaciones en la inteligencia artificial, sistemas expertos, reconocimiento del lenguaje natural, entre otras.
+
+\item \textbf{Verificador.} Puede usarse para codificar un verificador de tipos.
+
+\end{itemize}
+
+\subsubsection*{Desventajas}
+
+\begin{itemize}
+\item \textbf{Eficiencia.} La búsqueda exhaustiva tiene la desventaja evidente de que es poco eficiente en términos de tiempo de ejecución.
+
+\item \textbf{Aplicaciones.} Las áreas de aplicación son pocas y muy específicas.
+
+\item \textbf{Depuración.} Existen muy pocas herramientas de depuración, en su mayoría poco efectivas.
+
+\item \textbf{Inferencia.} Inferencia limitada por su base de conocimiento.
+
+\end{itemize}
+
+\section{Conclusiones}
+
+La diferencia principal entre la programación declarativa y la imperativa está en la forma de escribir los programas. En el paradigma imperativo importa saber cómo se realizan las operaciones paso a paso y cómo se maneja la memoria, mientras que en el declarativo lo más importante es conocer y describir cuál es la entrada y cuál es la salida de las funciones.
+
+En el paradigma imperativo las estructuras se construyen paso a paso, siendo cuidadosos con el manejo de la memoria, mientras que en el declarativo se construyen de forma recursiva. Por ejemplo, una lista ligada en el paradigma imperativo se construye con un nodo que apunta al nodo siguiente, que a su vez apunta a otro nodo siguiente y así sucesivamente; mientras que en el declarativo basta decir: una lista puede ser vacía o puede ser un elemento pegado a otra lista.
+
+Aunque la recursión se puede usar en el paradigma imperativo ésta es opcional, pues cualquier programa recursivo podría escribirse en su versión iterativa (con suficiente ingenio); sin embargo, en el paradigma declarativo, la recursión es la clave para resolver los problemas. Otra diferencia importante es que en el paradigma imperativo la recursión suele programarse con condicionales (if, switch-case), mientras que en el declarativo suele usarse \textit{patern matching}.
+
+\newpage
+
+\begin{thebibliography}{10}
+
+\bibitem{bird} \textsc{Bird, R. and Wadler, P}., \textit{Introduction to functional programming}, Prentice Hall, 1988.
+
+\bibitem{hutton} \textsc{Hutton, G.}, \textit{Programming in Haskell}, Cambridge University Press, 2007.
+
+\bibitem{shriram} \textsc{Krishnamurthi, S.}, \textit{Programming Languages: Application and Interpretation}, Brown University, 2003.
+
+\bibitem{spec} \textit{https://www.spec-india.com/blog/functional-programming-languages}
+
+\bibitem{spin} \textit{https://spin.atomicobject.com/2019/08/29/functional-prog-pros-cons/}
+
+\bibitem{incentro} \textit{https://www.incentro.com/es-ES/blog/que-programacion-funcional}
+
+\bibitem{ferestrepoca} \textit{https://ferestrepoca.github.io/paradigmas-de-programacion/proglogica/logica\_teoria/proglogica.html}
+
+\end{thebibliography}
+
+\end{document}
+

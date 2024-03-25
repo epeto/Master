@@ -1,0 +1,7 @@
+\babel@toc {spanish}{}\relax 
+\beamer@sectionintoc {1}{Aprendizaje por refuerzo}{2}{0}{1}
+\beamer@sectionintoc {2}{Antecedentes}{6}{0}{2}
+\beamer@sectionintoc {3}{El algoritmo}{11}{0}{3}
+\beamer@sectionintoc {4}{Resultados}{16}{0}{4}
+\beamer@sectionintoc {5}{Conclusiones}{18}{0}{5}
+\beamer@sectionintoc {6}{Apéndices}{19}{0}{6}

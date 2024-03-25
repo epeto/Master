@@ -1,0 +1,64 @@
+
+A route from Takatsuki to Yamashina that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Takatsuki take the Biwako line to Yamashina.
+This route uses 1 line and passes 1 intermediate station.
+
+A route from Takatsuki to Kyoto that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Takatsuki take the Biwako line to Kyoto.
+This route uses 1 line and passes 0 intermediate stations.
+
+A route from Yamashina to Sakamoto that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Yamashina take the Kosei line to Sakamoto.
+This route uses 1 line and passes 2 intermediate stations.
+
+A route from Yamashina to Ishiyama that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Yamashina take the Biwako line to Ishiyama.
+This route uses 1 line and passes 1 intermediate station.
+
+A route from Otsukyo to Sakamoto that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Otsukyo take the Kosei line to Sakamoto.
+This route uses 1 line and passes 1 intermediate station.
+
+A route from Otsukyo to Hamaotsu that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Otsukyo take the Kosei line to Sakamoto.
+	From Sakamoto take the Keihan line to Hamaotsu.
+This route uses 2 lines and passes 3 intermediate stations, including 1 transfer station.
+
+A route from Otsukyo to Ano that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Otsukyo take the Kosei line to Sakamoto.
+	From Sakamoto take the Keihan line to Ano.
+This route uses 2 lines and passes 2 intermediate stations, including 1 transfer station.
+
+A route from Takatsuki to Otsukyo that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Takatsuki take the Biwako line to Kyoto.
+	From Kyoto take the Kosei line to Otsukyo.
+This route uses 2 lines and passes 2 intermediate stations, including 1 transfer station.
+
+A route from Yamashina to Ano that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Yamashina take the Kosei line to Sakamoto.
+	From Sakamoto take the Keihan line to Ano.
+This route uses 2 lines and passes 3 intermediate stations, including 1 transfer station.
+
+A route from Takatsuki to Ano that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Takatsuki take the Biwako line to Kyoto.
+	From Kyoto take the Kosei line to Sakamoto.
+	From Sakamoto take the Keihan line to Ano.
+This route uses 3 lines and passes 5 intermediate stations, including 2 transfer stations.
+
+A route from Hamaotsu to Otsu that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Hamaotsu take the Keihan line to Sakamoto.
+	From Sakamoto take the Kosei line to Yamashina.
+	From Yamashina take the Biwako line to Otsu.
+This route uses 3 lines and passes 5 intermediate stations, including 2 transfer stations.
+
+A route from Zeze to Takatsuki that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Zeze take the Keihan line to Sakamoto.
+	From Sakamoto take the Kosei line to Kyoto.
+	From Kyoto take the Biwako line to Takatsuki.
+This route uses 3 lines and passes 7 intermediate stations, including 2 transfer stations.
+
+A route from Zeze to Kusatsu that uses fewest lines, and of those the one that passes the fewest intermediate stations:
+	From Zeze take the Keihan line to Sakamoto.
+	From Sakamoto take the Kosei line to Yamashina.
+	From Yamashina take the Biwako line to Kusatsu.
+This route uses 3 lines and passes 8 intermediate stations, including 2 transfer stations.

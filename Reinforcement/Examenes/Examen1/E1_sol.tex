@@ -1,0 +1,44 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Examen 1\\Aprendizaje por refuerzo}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+\section*{Problema 1}
+
+\begin{itemize}
+\item \textbf{¿Cuál es el objetivo de aprendizaje por refuerzo?}
+
+Diseñar agentes capaces de mejorar con la experiencia en un problema dado.
+
+\item \textbf{Explique con sus propias palabras que es un MDP.}
+
+Es una tarea de aprendizaje por refuerzo que satisface la propiedad de Markov.
+
+\item \textbf{¿Qué representan los estado-valor y estado acción?}
+
+El estado-valor es la recompensa esperada por llegar a cierto estado. El estado-acción es la recompensa esperada por estar en un estado y tomar cierta acción.
+
+\item \textbf{¿Cuál es la diferencia entre explorar y explotar?}
+
+La exploración encuentra más información acerca del ambiente y la explotación utiliza la información conocida para maximizar la recompensa.
+
+\item \textbf{Explique el principio de control de Monte-Carlos, SARSA y aprendizaje Q}
+
+    \begin{itemize}
+    \item \textbf{Monte Carlo.} El método de Monte-Carlo sólo requiere ejemplares de experiencia, los cuales son secuencias de estados, acciones y recompensas.
+    \item \textbf{SARSA.} Se sigue el patrón de iteración generalizada de política pero usando métodos de diferencia temporal para la parte de la evaluación. Es un método dentro de política (on-policy).
+    \item \textbf{Q-learning.} Es un método de control por diferencia temporal fuera de política (off-policy). En este caso, la función aprendida acción-valor ($Q$) aproxima directamente $Q^*$.
+    \end{itemize}
+
+\end{itemize}
+
+\end{document}
+

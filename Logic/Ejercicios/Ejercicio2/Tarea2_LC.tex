@@ -1,0 +1,79 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Ejercicio 2\\Lógica computacional}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+\textbf{1.}
+
+Transformación a FNN:
+
+$\lnot (w \rightarrow e) \lor  \lnot (( \lnot s \leftrightarrow w) \lor (e \land s))$\\
+$\equiv (w \land  \lnot e) \lor  \lnot (( \lnot s \leftrightarrow w) \lor (e \land s))$\\
+$\equiv (w \land  \lnot e) \lor  \lnot ((( \lnot s \rightarrow w) \land (w \rightarrow  \lnot s)) \lor (e \land s))$\\
+$\equiv (w \land  \lnot e) \lor  \lnot ((( \lnot s \lor w) \land ( \lnot w \lor  \lnot s)) \lor (e \land s))$\\
+$\equiv (w \land  \lnot e) \lor ( \lnot (( \lnot s \lor w)  \land  ( \lnot w \lor  \lnot s))  \land   \lnot (e \land s))$\\
+$\equiv (w \land  \lnot e) \lor (( \lnot ( \lnot s \lor w) \lor  \lnot ( \lnot w \lor \lnot s))  \land  ( \lnot e \lor  \lnot s))$\\
+$\equiv (w \land  \lnot e) \lor (((s \land  \lnot w) \lor (w \land s))  \land  ( \lnot e \lor \lnot s))$\\
+
+Transformación a FNC:
+
+$\equiv (w \land  \lnot e) \lor ((((s \land  \lnot w) \lor w)  \land  ((s \land  \lnot w) \lor s))  \land  ( \lnot e \lor  \lnot s))$\\
+$\equiv (w \land  \lnot e) \lor ((((s \lor w)  \land  ( \lnot w \lor w))  \land  ((s \lor s)  \land  ( \lnot w \lor s)))  \land  ( \lnot e \lor  \lnot s))$\\
+$\equiv (w \land  \lnot e) \lor ((s \lor w)  \land  ( \lnot w \lor w)  \land  (s \lor s)  \land  ( \lnot w \lor s)  \land  ( \lnot e \lor  \lnot s))$\\
+$\equiv (w \lor ((s \lor w)  \land  ( \lnot w \lor w)  \land  (s \lor s)  \land  ( \lnot w \lor s)  \land  ( \lnot e \lor  \lnot s)))  \land  ( \lnot e \lor ((s \lor w)  \land  ( \lnot w \lor w)  \land  (s \lor s)  \land  ( \lnot w \lor s)  \land  ( \lnot e \lor  \lnot s)))$\\
+$\equiv (w \lor s \lor w)  \land  (w \lor  \lnot w \lor w)  \land  (w \lor s \lor s)  \land  (w \lor  \lnot w \lor s)  \land  (w \lor  \lnot e \lor  \lnot s)  \land  ( \lnot e \lor s \lor w)  \land  ( \lnot e \lor  \lnot w \lor w)  \land  ( \lnot e \lor s \lor s)  \land  ( \lnot e \lor  \lnot w \lor s)  \land  ( \lnot e \lor  \lnot e \lor  \lnot s)$\\
+
+Transformación a FNN:
+
+$\lnot (p \rightarrow ( \lnot r \rightarrow s) \leftrightarrow  \lnot ( \lnot q \land (p \lor r)))$
+
+$\equiv \lnot ((p \rightarrow ( \lnot r \rightarrow s)) \rightarrow  \lnot ( \lnot q \land (p \lor r)) \land ( \lnot ( \lnot q \land (p \lor r)) \rightarrow (p \rightarrow ( \lnot r \rightarrow s))))$
+
+$\equiv \lnot ( \lnot (p \rightarrow ( \lnot r \rightarrow s)) \lor  \lnot ( \lnot q \land (p \lor r)) \land (( \lnot q \land (p \lor r)) \lor (p \rightarrow ( \lnot r \rightarrow s))))$
+
+$\equiv \lnot ( \lnot ( \lnot p \lor (r \lor s)) \lor  \lnot ( \lnot q \land (p \lor r)) \land (( \lnot q \land (p \lor r)) \lor ( \lnot p \lor ( \lnot r \lor s))))$
+
+$\equiv \lnot ( \lnot ( \lnot p \lor r \lor s) \lor  \lnot ( \lnot q \land (p \lor r)) \land (( \lnot q \land (p \lor r)) \lor ( \lnot p \lor  \lnot r \lor s)))$
+
+$\equiv \lnot ((p \land  \lnot r \land  \lnot s) \lor (q \lor  \lnot (p \lor r)) \land (( \lnot q \land (p \lor r)) \lor ( \lnot p \lor  \lnot r \lor s)))$
+
+$\equiv \lnot ((p \land  \lnot r \land  \lnot s) \lor (q \lor ( \lnot p \land  \lnot r)) \land (( \lnot q \land (p \lor r)) \lor ( \lnot p \lor  \lnot r \lor s)))$
+
+$\equiv \lnot ((p \land  \lnot r \land  \lnot s) \lor (q \lor ( \lnot p \land  \lnot r))) \lor  \lnot (( \lnot q \land (p \lor r)) \lor ( \lnot p \lor  \lnot r \lor s))$
+
+$\equiv ( \lnot (p \land  \lnot r \land  \lnot s) \land  \lnot (q \lor ( \lnot p \land  \lnot r))) \lor ( \lnot ( \lnot q \land (p \lor r)) \land  \lnot ( \lnot p \lor  \lnot r \lor s))$
+
+$\equiv (( \lnot p \lor r \lor s) \land ( \lnot q \land  \lnot ( \lnot p \land  \lnot r))) \lor ((q \lor  \lnot (p \lor r)) \land (p \land r \land  \lnot s))$
+
+$\equiv (( \lnot p \lor r \lor s) \land ( \lnot q \land (p \lor r))) \lor ((q \lor ( \lnot p \land  \lnot r)) \land (p \land r \land  \lnot s))$\\
+
+Transformación a FNC:
+
+$\equiv ((( \lnot p \lor r \lor s) \land ( \lnot q \land (p \lor r))) \lor (q \lor ( \lnot p \land  \lnot r))) \land ((( \lnot p \lor r \lor s) \land ( \lnot q \land (p \lor r))) \lor (p \land r \land  \lnot s))$
+
+$\equiv (( \lnot p \lor r \lor s) \lor (q \lor ( \lnot p \land  \lnot r))) \land (( \lnot q \land (p \lor r)) \lor (q \lor ( \lnot p \land  \lnot r))) \land ((( \lnot p \lor r \lor s) \land ( \lnot q \land (p \lor r))) \lor (p \land r \land  \lnot s))$
+
+$\equiv (( \lnot p \lor r \lor s) \lor (q \lor ( \lnot p \land  \lnot r))) \land (( \lnot q \land (p \lor r)) \lor (q \lor ( \lnot p \land  \lnot r))) \land (( \lnot p \lor r \lor s) \lor (p \land r \land  \lnot s)) \land (( \lnot q \land (p \lor r)) \lor (p \land r \land  \lnot s))$
+
+$\equiv (( \lnot p \lor r \lor s \lor q) \lor ( \lnot p \land  \lnot r)) \land (( \lnot q \land (p \lor r)) \lor q \lor ( \lnot p \land  \lnot r)) \land (( \lnot p \lor r \lor s) \lor (p \land r \land  \lnot s)) \land (( \lnot q \land (p \lor r)) \lor (p \land r \land  \lnot s))$
+
+$\equiv ( \lnot p \lor r \lor s \lor q \lor ( \lnot p \land  \lnot r)) \land (( \lnot q \land (p \lor r)) \lor q \lor ( \lnot p \land  \lnot r)) \land ( \lnot p \lor r \lor s \lor (p \land r \land  \lnot s)) \land (( \lnot q \land (p \lor r)) \lor (p \land r \land  \lnot s))$
+
+$\equiv ( \lnot p \lor r \lor s \lor q \lor  \lnot p) \land ( \lnot p \lor r \lor s \lor q \lor  \lnot r) \land (( \lnot q \land (p \lor r)) \lor (q \lor ( \lnot p \land  \lnot r))) \land ( \lnot p \lor r \lor s \lor (p \land r \land  \lnot s)) \land (( \lnot q \land (p \lor r)) \lor (p \land r \land  \lnot s))$
+
+$\equiv ( \lnot p \lor r \lor s \lor q \lor  \lnot p) \land ( \lnot p \lor r \lor s \lor q \lor  \lnot r) \land (( \lnot q \lor q) \lor ( \lnot p \land  \lnot r)) \land ((p \lor r \lor q) \lor ( \lnot p \land  \lnot r)) \land (( \lnot p \lor r \lor s) \lor (p \land r \land  \lnot s)) \land (( \lnot q \land (p \lor r)) \lor (p \land r \land  \lnot s))$
+
+$\equiv ( \lnot p \lor r \lor s \lor q \lor  \lnot p) \land ( \lnot p \lor r \lor s \lor q \lor  \lnot r) \land ( \lnot q \lor q \lor  \lnot p) \land ( \lnot q \lor q \lor  \lnot r) \land (p \lor r \lor q \lor  \lnot p) \land (p \lor r \lor q \lor  \lnot r) \land ( \lnot p \lor r \lor s \lor p) \land ( \lnot p \lor r \lor s \lor r) \land ( \lnot p \lor r \lor s \lor  \lnot s) \land (( \lnot q \land (p \lor r)) \lor p) \land (( \lnot q \land (p \lor r)) \lor r) \land (( \lnot q \land (p \lor r)) \lor  \lnot s)$
+
+$\equiv ( \lnot p \lor r \lor s \lor q \lor  \lnot p) \land ( \lnot p \lor r \lor s \lor q \lor  \lnot r) \land ( \lnot q \lor q \lor  \lnot p) \land ( \lnot q \lor q \lor  \lnot r) \land (p \lor r \lor q \lor  \lnot p) \land (p \lor r \lor q \lor  \lnot r) \land ( \lnot p \lor r \lor s \lor p) \land ( \lnot p \lor r \lor s \lor r) \land ( \lnot p \lor r \lor s \lor  \lnot s) \land ( \lnot q \lor p) \land (p \lor r \lor p) \land ( \lnot q \lor r) \land (p \lor r \lor r) \land ( \lnot q \lor  \lnot s) \land (p \lor r \lor  \lnot s)$
+
+\end{document}
+

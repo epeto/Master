@@ -1,0 +1,254 @@
+\documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{listings}
+\title{Reporte de proyecto\\Sistemas expertos}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+\section{Crear consulta}
+
+La primera parte del sistema consiste en crear una consulta, dadas las restricciones del usuario.
+
+\subsection{Incluir}
+
+La primera restricción es: incluir un ingrediente
+
+Ejemplos de los ingredientes que puede incluir:
+\begin{itemize}
+\item butter
+\item salt
+\item olive oil
+\item honey
+\end{itemize}
+
+\subsection{Excluir}
+
+Segunda restricción: excluir un ingrediente. Los ejemplos son los mismos que en la inclusion.
+
+\subsection{Categoría}
+
+Tercera restricción: elegir una categoría.
+
+El usuario que compartió la receta le pone ciertas etiquetas (\textit{tags}) a una receta, que pueden describir el tipo de receta que está subiendo.
+
+Ejemplos de categorías:
+\begin{itemize}
+\item north-american
+\item breakfast
+\item dietary
+\item christmas
+\end{itemize}
+
+\subsection{Requerimientos nutricionales}
+
+Cuarta restricción: contenido menor al promedio.
+
+El usuario puede elegir que un componente de su receta sea menor al promedio, por ejemplo, que la receta sea baja en azúcares.
+
+Los componentes nutricionales de las recetas son:
+\begin{itemize}
+\item calories
+\item total\_fat
+\item sugar
+\item sodium
+\item protein
+\item saturated\_fat
+\item carbohydrates
+\end{itemize}
+
+Cuando ya se eligieron las cuatro restricciones, se guardan todas las recetas que cumplan con esas condiciones en un archivo llamado \texttt{query\_id\_recipes.csv}
+
+\subsection{Interacción}
+
+A continuación se muestra el resultado de la interacción de un usuario con el sistema:
+
+\begin{verbatim}
+prompt:
+Elija una acción:
+1.-Crear consulta
+2.-Crear plan
+3.-Consultar ingredientes y pasos de un plan
+usuario:
+1
+
+prompt:
+¿Desea incluir ingredientes?
+1.-Sí
+2.-No
+usuario:
+1
+
+prompt:
+Ingrese la lista de ingredientes a incluir, separados solo por comas.
+usuario:
+bananas
+
+prompt:
+¿Desea excluir ingredientes?
+1.-Sí
+2.-No
+usuario:
+1
+
+prompt:
+Ingrese la lista de ingredientes a excluir, separados solo por comas.
+usuario:
+onion
+
+prompt:
+¿Las recetas pertenecen a alguna categoría?
+1.-Sí
+2.-No
+usuario:
+1
+
+prompt:
+Ingrese las categorías, separadas solo por comas.
+usuario:
+brunch
+
+prompt:
+¿Desea agregar requerimientos nutricionales?
+1.-Sí
+2.-No
+usuario:
+2
+
+Recetas guardadas en archivo: query_id_recipes.csv
+
+\end{verbatim}
+
+Para este ejemplo, el contenido del archivo \texttt{query\_id\_recipes.csv} es: 9,84
+
+Lo que quiere decir que solo las recetas 9 y 84 cumplen con los requerimientos del usuario.
+
+\section{Crear plan}
+
+Para esta parte debe existir el archivo \texttt{query\_id\_recipes.csv}, que contiene los ids con las restricciones del usuario.
+
+La segunda parte del sistema\footnote{Hay que ejecutar el programa una vez por cada parte que se requiera.} consiste en crear un plan:
+
+\begin{itemize}
+\item Una receta: si se elige este plan, se tomarán 10 opciones aleatorias del archivo \texttt{query\_id\_recipes.csv} y se guardarán los nombres de receta en un archivo llamado \texttt{query\_una.csv}.
+\item Un día: se tomarán 9 opciones aleatorias y se crearán 3 columnas: desayuno, comida y cena. Cada columna tendrá 3 opciones de recetas. Se guarda en un archivo: \texttt{query\_dia.csv}.
+\item Una semana: se tomarán 15 opciones aleatorias y se crearán 5 columnas, una para cada día de la semana. Cada columna tendrá 3 recetas: una para el desayuno, una para la comida y una para la cena. Se guarda en un archivo \texttt{query\_semana.csv}.
+\end{itemize}
+
+Se hará una demostración de interacción con el usuario. Para esto, supondremos que el archivo \texttt{query\_id\_recipes.csv} tiene los ids: 9, 20, 25, 32, 57, 101, 201, 250, 300, 321, 400, 464, 480, 508, 645, 670, 712, 844, 911, 950.
+
+\begin{verbatim}
+prompt:
+Elija una acción:
+1.-Crear consulta
+2.-Crear plan
+3.-Consultar ingredientes y pasos de un plan
+usuario:
+2
+
+prompt:
+Elija qué tipo de plan requiere:
+1.-Una receta
+2.-Recetas para el día
+3.-Plan semanal
+usuario:
+2
+
+prompt:
+9 recetas guardadas en: query_dia.csv
+\end{verbatim}
+
+El contenido del archivo \texttt{query\_dia.csv} es:
+
+desayuno,comida,cena\\
+300$|$you can t eat just one ice box cookies,57$|$make that chicken dance salsa pasta,911$|$11 secret herbs and spices kfc copycat\\
+20$|$cream of spinach soup,250$|$party taco dip,321$|$bailey s hot fudge sauce\\
+844$|$10 minute mustard dip,670$|$not meatballs,508$|$pumpkin pie filling for mexico
+
+\section{Listar ingredientes y pasos}
+
+Para esta parte se supone que existe al menos uno de los siguientes archivos:
+\begin{itemize}
+\item \texttt{query\_una.csv}
+\item \texttt{query\_dia.csv}
+\item \texttt{query\_semana.csv}
+\end{itemize}
+
+Una vez que ya se tienen guardados los ingredientes del plan, se despliegan los ingredientes y los pasos.
+
+Una de las opciones es obtener la lista completa de ingredientes. Esto podría servirle al usuario para hacer la lista del supermercado e ir a comprar la despensa de la semana (en el caso del plan semanal).
+
+Otra opción es elegir un id de receta para desplegar los ingredientes y luego los pasos. Antes de eso verá el \textit{dataframe} con la información de las recetas para saber qué \texttt{id} elegir.
+
+Se muestra una interacción con el usuario.
+
+\begin{verbatim}
+prompt:
+Elija una acción:
+1.-Crear consulta
+2.-Crear plan
+3.-Consultar ingredientes y pasos de un plan
+usuario:
+3
+
+prompt:
+Ingrese el plan que quiere consultar:
+1.-Una receta
+2.-Un día
+3.-Semanal
+usuario:
+2
+
+prompt:
+El número a la izquierda es el id de la receta
+                                     desayuno  ...                                        cena
+0  300|you can t eat just one ice box cookies  ...  911|11 secret herbs and spices kfc copycat
+1                    20|cream of spinach soup  ...                321|bailey s hot fudge sauce
+2                   844|10 minute mustard dip  ...          508|pumpkin pie filling for mexico
+[3 rows x 3 columns]
+
+prompt:
+Elija una acción:
+1.-Obtener lista completa de ingredientes
+2.-Mostrar ingredientes y pasos de una receta
+usuario:
+2
+
+prompt:
+Ingrese el id de la receta que quiere obtener
+usuario:
+20
+
+prompt:
+Lista de ingredientes:
+water
+salt
+boiling potatoes
+fresh spinach leaves
+unsalted butter
+coarse salt
+fresh ground black pepper
+nutmeg
+
+Pasos a seguir:
+bring water and salt to a boil
+cut the potatoes in half lengthwise
+and then into 1 / 2 thick slices
+boil over medium-high heat for twenty minutes
+add the spinach and boil another 10 minutes being careful to not overcook in order to maintain its bright green color
+drain
+reserving 1 1 / 4 cups cooking liquid
+in a food processor
+process the potatoes and spinach until very smooth
+adding the butter 1 / 2 t at a time
+return the puree to the pot and add the reserved liquid until the desired consistency
+reheat slowly and season with salt and pepper
+ladle into shallow soup plates and garnish with nutmeg or shaved cheese
+\end{verbatim}
+
+\end{document}
+

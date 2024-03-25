@@ -1,0 +1,293 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage{listings}
+\title{Tarea 1\\Diseño y análisis de algoritmos}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+%\maketitle
+
+\textbf{3.}
+
+Secuencia:
+
+\begin{itemize}
+\item $s_0 = 0$
+\item $s_1 = 1$
+\item $s_2 = 2$
+\item $s_n = 5s_{n-1} + 4s_{n-2} - 2s_{n-3}$ para $n \geq 3$
+\end{itemize}
+
+\textbf{a)}
+
+Se pretende plantear una solución para la recurrencia utilizando exponenciación y producto de matrices, usando la estrategia del algoritmo \textit{fexpmat}().
+
+Antes de plantear la solución se van a definir algunas funciones. La siguiente función \textit{matMul}, toma dos matrices, $m1$ y $m2$, y devuelve el producto de matrices $m1 \times m2$. Observe que las matrices pueden ser de cualquier tamaño mayor o igual a 1; el único requisito es que el número de columnas de $m1$ sea igual al número de filas de $m2$, si no lo son devuelve una lista vacía.
+
+\begin{lstlisting}[language=Python]
+ 1:def matMul(m1, m2):
+ 2:    if len(m1[0]) != len(m2):
+ 3:        return []
+ 4:    filas1 = len(m1)
+ 5:    columnas2 = len(m2[0])
+ 6:    rangoK = len(m1[0])
+ 7:    n = len(m1)
+ 8:    matRes = []
+ 9:    for i in range(filas1):
+10:        vector = []
+11:        for j in range(columnas2):
+12:            vector.append(0)
+13:        matRes.append(vector)
+14:    for i in range(filas1):
+15:        for j in range(columnas2):
+16:            for k in range(rangoK):
+17:                producto = m1[i][k]*m2[k][j]
+18:                matRes[i][j] += producto
+19:    return matRes
+\end{lstlisting}
+
+La siguiente función \textit{matriz\_identidad} toma un número ($lado$) y devuelve la matriz identidad de tamaño $lado \times lado$.
+
+\begin{lstlisting}[language=Python]
+ 1:def matriz_identidad(lado):
+ 2:    matriz = []
+ 3:    for i in range(lado):
+ 4:        vector = []
+ 5:        for j in range(lado):
+ 6:            if j == i:
+ 7:                vector.append(1)
+ 8:            else:
+ 9:                vector.append(0)
+10:        matriz.append(vector)
+11:    return matriz
+\end{lstlisting}
+
+La siguiente función \textit{potMat} toma una matriz (\textit{matriz}), un número (\textit{potencia}) y devuelve el resultado de elevar esa matriz a esa potencia ($matriz^{potencia}$).
+
+\begin{lstlisting}[language=Python]
+1:def potMat(matriz, potencia):
+2:    n = potencia
+3:    if n == 0:
+4:        return matriz_identidad(len(matriz))
+5:    elif n%2 == 1:
+6:        return matMul(matriz, potMat(matriz, n-1))
+7:    else:
+8:        matAux = potMat(matriz, n//2)
+9:        return matMul(matAux, matAux)
+\end{lstlisting}
+
+Para solucionar el problema se necesita una matriz $m$ tal que al multiplicar $m^n$ por la izquierda con el vector columna
+\[vc = \begin{bmatrix}
+2 \\
+1 \\
+0 \\
+\end{bmatrix}\]
+
+se obtenga lo siguiente
+
+\[
+m^{n} \times vc =
+\begin{bmatrix}
+s_{n+2} \\
+s_{n+1} \\
+s_n
+\end{bmatrix}
+\] y así poder obtener el valor $s_n$.
+
+Por los coeficientes de la sucesión, se sabe que la matriz tiene la forma
+\[
+m =
+\begin{bmatrix}
+5 & 4 & -2 \\
+a & b & c \\
+d & e & f\\
+\end{bmatrix}
+\]
+
+Calculando el valor de $s_3$ se obtiene:\\
+$s_3 = 5s_2 + 4s_1 - 2s_0$\\
+$ = 5(2) + 4(1) - 2(0)$\\
+$ = 14$
+
+Entonces
+
+\[
+\begin{bmatrix}
+5 & 4 & -2 \\
+a & b & c \\
+d & e & f\\
+\end{bmatrix}
+\times
+\begin{bmatrix}
+2 \\
+1 \\
+0 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+14 \\
+2 \\
+1 \\
+\end{bmatrix}
+\]
+
+Por la anterior observación, se tienen que satisfacer las siguientes ecuaciones:\\
+$2a+b = 2$\\
+$2d+e = 1$
+
+Se eligirá la siguiente asignación de valores:
+\begin{itemize}
+\item $a$: 1
+\item $b$: 0
+\item $c$: 0
+\item $d$: 0
+\item $e$: 1
+\item $f$: 0
+\end{itemize}
+
+Es decir, la matriz $m$ tiene las siguientes entradas:
+\[
+m =
+\begin{bmatrix}
+5 & 4 & -2 \\
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+\end{bmatrix}
+\]
+
+Así, el algoritmo para calcular $s_n$ consiste en los siguientes pasos:
+
+\begin{itemize}
+\item[1.] Dada la matriz $m$, calcular $m^n$.
+\item[2.] Multiplicar $m^n$ (por la izquierda) con el vector columna $vc = [2, 1, 0]$ y obtener el vector columna $vr = [s_{n+2}, s_{n+1}, s_n]$.
+\item[3.] Devolver la última entrada (la que está más abajo) del vector columna $vr$.
+\end{itemize}
+
+La siguiente función \textit{secuencia} calcula el $n$-ésimo elemento de la sucesión descrita. En la línea 8 se calcula la matriz $m^n$ y se guarda en la variable \texttt{mat\_n}. En la línea 9 se calcula el producto de \texttt{mat\_n} con \texttt{vc} y se guarda en la variable \texttt{vr}. En la 10 se devuelve la última entrada del vector columna \texttt{vr} (fila 2, columna 0).
+
+\begin{lstlisting}[language=Python]
+ 1:def secuencia(n):
+ 2:    m = [[5,4,-2],
+ 3:         [1,0,0],
+ 4:         [0,1,0]]
+ 5:    vc = [[2],
+ 6:          [1],
+ 7:          [0]]
+ 8:    mat_n = potMat(m, n)
+ 9:    vr = matMul(mat_n, vc)
+10:    return vr[2][0]
+\end{lstlisting}
+
+Ahora se procederá a demostrar que el algoritmo es correcto usando inducción sobre $n$.
+
+\underline{Caso base:} $n=0$.
+
+Si $n=0$, la función \textit{potMat(m, 0)} devuelve la matriz identidad de $3 \times 3$ (pues $m$ es de $3 \times 3$). Por una propiedad del álgebra lineal se tiene que $I \times M = M$ para cualquier matriz $M$, donde $I$ es la matriz identidad. Así, el resultado de multiplicar \texttt{mat\_n} por \texttt{vc} es \texttt{vc} (es decir, \texttt{vr} será igual a \texttt{vc}). Entonces, el resultado de devolver la entrada [2][0] de \texttt{vr} es 0, así que para este caso, \textit{secuencia}(0) = 0 = $s_0$, y por lo tanto es correcto.
+
+\underline{H. I.} Existe una $k \geq 0$ tal que al ejecutar el algoritmo $secuencia(k)$, al final se cumple que $mat\_n = m^k$ (por definición de \texttt{potMat}) y que $m^k \times vc$ (resultado de la función \texttt{matMul(mat\_n, vc)}) es igual al vector columna
+\[
+\begin{bmatrix}
+s_{k+2} \\
+s_{k+1} \\
+s_k \\
+\end{bmatrix}
+\]
+
+el cual se guarda en \texttt{vr}, y por lo tanto, $secuencia(k) = s_k$.
+
+Se demostrará que para $secuencia(k+1)$, \texttt{vr} guarda el vector columna
+\[
+\begin{bmatrix}
+s_{k+3} \\
+s_{k+2} \\
+s_{k+1} \\
+\end{bmatrix}
+\]
+
+y entonces $secuencia(k+1) = s_{k+1}$.
+
+\underline{Demostración.}
+
+Se sabe que para $secuencia(k+1)$, el algoritmo primero calcula $m^{k+1}$ y luego multiplica la matriz resultante por el vector $vc$; es decir, se realiza la operación $m^{k+1} \times vc$ y se guarda el resultado en $vr$. Pero se sabe que la multiplicación de matrices es asociativa, así que $m^{k+1} \times vc = m \times (m^k \times vc)$.
+
+Por hipótesis se sabe que
+\[
+m^k \times vc =
+\begin{bmatrix}
+s_{k+2} \\
+s_{k+1} \\
+s_k \\
+\end{bmatrix}
+\]
+
+Así pues
+\[
+m^{k+1} \times vc = m \times (m^k \times vc) =
+\begin{bmatrix}
+5 & 4 & -2 \\
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+\end{bmatrix}
+\times
+\begin{bmatrix}
+s_{k+2} \\
+s_{k+1} \\
+s_k \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+5s_{k+2} + 4s_{k+1} - s_k \\
+s_{k+2} \\
+s_{k+1} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+s_{k+3} \\
+s_{k+2} \\
+s_{k+1} \\
+\end{bmatrix}
+\]
+
+Este vector resultante se guarda en \texttt{vr}. Observe que $s_{k+3}$ se obtiene de la definición de la secuencia.
+
+Al final, el algoritmo devuelve la última entrada del vector columna \texttt{vr}, la cual es $s_{k+1}$, y por lo tanto $secuencia(k+1) = s_{k+1}$. $\blacksquare$
+
+\textbf{b)}
+
+La operación de multiplicación de matrices tiene complejidad $O(\ell ^3)$, donde $\ell$ es el máximo entre los siguientes valores:
+\begin{itemize}
+\item Número de columnas de \texttt{m1}.
+\item Número de columnas de \texttt{m2}.
+\item Número de filas de \texttt{m1}.
+\item Número de filas de \texttt{m2}.
+\end{itemize}
+
+Pero para el caso del algoritmo de \textit{secuencia} se sabe que \texttt{m1} sólo puede ser una matriz de $3 \times 3$ y \texttt{m2} puede ser una matriz de $3 \times 3$ o de $3 \times 1$. Así que el peor caso se da cuando tanto \texttt{m1} y \texttt{m2} son de $3 \times 3$.
+
+Se contará el número de operaciones que realiza \texttt{matMul(m1, m2)} donde ambas matrices son de $3 \times 3$. Para simplificar, sólo se van a contar las operaciones lógico-aritméticas (la operación \texttt{+=} contará como una operación aritmética). En la línea 2 se realiza una comparación. En las línea 17 se realiza una multiplicación y en la 18 una suma con asignación. Se sabe que para este caso $filas1=columnas2=rangoK=3$, así que se realizan $3^3 = 27$ multiplicaciones y 27 sumas con asignación. Así, el número total de operaciones será 1+27+27=55.
+
+La función \texttt{matriz\_identidad} construye una matriz de $3 \times 3$ (para nuestro caso particular) y realiza $3 \times 3=9$ operaciones.
+
+Ahora se calculará el número de operaciones de la función $potMat(matriz, n)$ para el peor caso.
+\begin{itemize}
+\item[1.] En el caso base, cuando $n$ es 0, se realiza una comparación más las 9 operaciones de \texttt{matriz\_identidad}, así que son 10 en total.
+\item[2.] Si $n$ es impar entonces se realizan 2 comparaciones, 55 operaciones de la función $matMul$, más el número de operaciones de $potMat(matriz, n-1)$. Por lo tanto son 57 + \textbf{numOps}($potMat(matriz, n-1)$), donde \textbf{numOps} es el número de operaciones de la función entre paréntesis. Observe que si $n$ es impar entonces $n-1$ es par, así que la siguiente llamada recursiva cae en el caso 3.
+\item[3.] Si $n$ es par entonces se realizan 2 comparaciones más el número de operaciones de $potMat(matriz, n/2)$, más las 55 operaciones de $matMul$. Así que son 57 + \textbf{numOps}($potMat(matriz, n/2)$).
+\end{itemize}
+
+En el peor caso, cada dos llamadas recursivas el argumento $n$ de $potMat$ será un número impar. Pero cuando no es impar se divide $n$ a la mitad. En el peor caso se realizan 57+57=114 operaciones por el número de llamadas recursivas para el caso par. Como $n$ se divide a la mitad para cada llamada donde el argumento es par, entonces se realizan $114 \log (n)$ operaciones en el peor caso.
+
+Finalmente, se calcularán las operaciones de la función $secuencia$.
+\begin{itemize}
+\item La función $potMat(m,n)$ (línea 8) realiza a lo sumo $114 \log (n)$ operaciones.
+\item La función $matMul(mat\_n, vc)$ realiza menos de 55 operaciones.
+\end{itemize}
+
+Así, $114 \log(n) + 55$ es una cota superior para el número de operaciones de $secuencia(n)$, lo cual es $O(\log n)$. $\blacksquare$
+
+\end{document}
+

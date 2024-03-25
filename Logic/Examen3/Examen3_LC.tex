@@ -1,0 +1,281 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Examen 3\\Lógica computacional}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+\section*{Problema 1}
+
+\textbf{a)}
+
+\begin{itemize}
+\item Alcance de $z$ en $\forall z$: $S(z, x)$
+\item Alcance de $z$ en $\exists z$: $T(y, z)$
+\item Alcance de $v$ en $\exists v$: $(\exists x R(y,x,v)) \land T(x, v))$
+\item Alcance de $x$ en $\exists x$: $R(y, x, v)$
+\end{itemize}
+
+\textbf{b)}
+
+$FV(A) = \{ x, v, y, w, z \}$
+
+\textbf{c)}
+
+$BV(A) = \{z, v, x\}$
+
+\section*{Problema 2}
+
+\textbf{a)}
+
+Observemos que la sustitución $[x, z := f(a), b]$ solo se aplica a la subfórmula que está a la derecha del $\land$: $\lnot \exists x (L(x) \rightarrow T(y) \land R(z))$.
+
+Se aplicará una $\alpha-$equivalencia de la fórmula $\lnot \exists x (L(x) \rightarrow T(y) \land R(z))$ cambiando la variable ligada $x$ por $v$: $\lnot \exists v (L(v) \rightarrow T(y) \land R(z))$.
+
+\begin{itemize}
+\item $\lnot \exists v (L(v) \rightarrow T(y) \land R(z)) [x, z := f(a), b]$
+\item $\lnot \exists v ((L(v) \rightarrow T(y) \land R(z)) [x, z := f(a), b])$
+\item $\lnot \exists v (L(v) [x, z := f(a), b] \rightarrow (T(y) \land R(z)) [x, z := f(a), b])$
+\item $\lnot \exists v (L(v) \rightarrow T(y) [x, z := f(a), b] \land R(z) [x, z := f(a), b])$
+\item $\lnot \exists v (L(v) \rightarrow T(y) \land R(b))$
+\end{itemize}
+
+La fórmula completa sería:
+
+$\exists x (L(x) \land T(x)) \land \lnot \exists v (L(v) \rightarrow T(y) \land R(b))$
+
+\textbf{b)}
+
+% ∃x(∀y(Rxy → Qz) ∧ Sxy) [x, y, z := ghay, gb, f y]
+
+Se usará la siguiente alfa equivalencia: cambiar la $x$ ligada por $v$ y la $y$ ligada por $w$: $\exists v (\forall w (R(v, w) \rightarrow Q(z)) \land S(v, y))$
+
+\begin{itemize}
+\item $\exists v (\forall w (R(v, w) \rightarrow Q(z)) \land S(v, y)) [x, y, z := g(h(a, y)), g(b), f(y)]$
+\item $\exists v ( (\forall w (R(v, w) \rightarrow Q(z)) \land S(v, y)) [x, y, z := g(h(a, y)), g(b), f(y)] )$
+\item $\exists v ( \forall w (R(v, w) \rightarrow Q(z)) [x, y, z := g(h(a, y)), g(b), f(y)] \land S(v, y) [x, y, z := g(h(a, y)), g(b), f(y)] )$
+\item $\exists v ( \forall w (R(v, w) [x, y, z := g(h(a, y)), g(b), f(y)] \rightarrow Q(z) [x, y, z := g(h(a, y)), g(b), f(y)]) \land S(v, g(b)) )$
+\item $\exists v ( \forall w (R(v, w) \rightarrow Q(f(y))) \land S(v, g(b)) )$
+\end{itemize}
+
+\section*{Problema 3}
+
+\textbf{a)}
+
+Primer paso: Rectificación
+
+% ∀x(P x → ∀y(Gxy → Lxy))
+
+\textbf{1)} $\forall x (P(x) \rightarrow \forall y (G(x, y) \rightarrow L(x, y)))$: ya está rectificada.
+
+% ∀x(P x → ∀x(Gxy ↔ ∃zRxy))
+
+\textbf{2)} $\forall x (P(x) \rightarrow \forall x (G(x, y) \leftrightarrow \exists z R(x, y))) \equiv \forall x (P(x) \rightarrow \forall v (G(v, y) \leftrightarrow R(v, y)))$
+
+% ∀x(P x → ∀y(Rxy → Lxy))
+
+\textbf{3)} Se va a negar la fórmula: $\forall x (P(x) \rightarrow \forall y (R(x, y) \rightarrow L(x, y)))$
+
+$\lnot \forall x (P(x) \rightarrow \forall y (R(x, y) \rightarrow L(x, y)))$\\
+$\equiv \exists x \lnot (P(x) \rightarrow \forall y (R(x, y) \rightarrow L(x, y)))$\\
+$\equiv \exists x (P(x) \land \lnot \forall y (R(x, y) \rightarrow L(x, y)))$\\
+$\equiv \exists x (P(x) \land \exists y \lnot (R(x, y) \rightarrow L(x, y)))$\\
+$\equiv \exists x (P(x) \land \exists y (R(x, y) \land \lnot L(x, y)))$
+
+Observemos que ya está rectificada.
+
+Segundo paso: transformación a forma normal negativa.
+
+\textbf{1)} $\forall x (P(x) \rightarrow \forall y (G(x, y) \rightarrow L(x, y)))$\\
+$\equiv \forall x (P(x) \rightarrow \forall y (\lnot G(x, y) \lor L(x, y)))$\\
+$\equiv \forall x (\lnot P(x) \lor \forall y (\lnot G(x, y) \lor L(x, y)))$
+
+\textbf{2)} $\forall x (P(x) \rightarrow \forall v (G(v, y) \leftrightarrow R(v, y)))$\\
+$\equiv \forall x (\lnot P(x) \lor \forall v (G(v, y) \leftrightarrow R(v, y)))$\\
+$\equiv \forall x (\lnot P(x) \lor \forall v ((G(v, y) \rightarrow R(v, y)) \land (R(v, y) \rightarrow G(v, y))))$\\
+$\equiv \forall x (\lnot P(x) \lor \forall v ((\lnot G(v, y) \lor R(v, y)) \land (\lnot R(v, y) \lor G(v, y))))$
+
+\textbf{3)} $\equiv \exists x (P(x) \land \exists y (R(x, y) \land \lnot L(x, y)))$ ya está en FNN.
+
+Tercer paso: transformar a forma normal prenex.
+
+\textbf{1)} $\forall x (\lnot P(x) \lor \forall y (\lnot G(x, y) \lor L(x, y)))$\\
+$\equiv \forall x \forall y (\lnot P(x) \lor \lnot G(x, y) \lor L(x, y))$
+
+\textbf{2)} $\forall x (\lnot P(x) \lor \forall v ((\lnot G(v, y) \lor R(v, y)) \land (\lnot R(v, y) \lor G(v, y))))$\\
+$\equiv \forall x \forall v (\lnot P(x) \lor ((\lnot G(v, y) \lor R(v, y)) \land (\lnot R(v, y) \lor G(v, y))))$
+
+\textbf{3)} $\exists x (P(x) \land \exists y (R(x, y) \land \lnot L(x, y)))$\\
+$\exists x \exists y ( P(x) \land R(x, y) \land \lnot L(x, y) )$
+
+Cuarto paso: transformar a forma normal de Skolem.
+
+\textbf{1)} $\forall x \forall y (\lnot P(x) \lor \lnot G(x, y) \lor L(x, y))$ ya está en FNS y la matriz es $\lnot P(x) \lor \lnot G(x, y) \lor L(x, y)$.
+
+\textbf{2)} $\forall x \forall v (\lnot P(x) \lor ((\lnot G(v, y) \lor R(v, y)) \land (\lnot R(v, y) \lor G(v, y))))$ ya está en FNS y la matriz es $\lnot P(x) \lor ((\lnot G(v, y) \lor R(v, y)) \land (\lnot R(v, y) \lor G(v, y)))$
+
+\textbf{3)} $\exists x \exists y ( P(x) \land R(x, y) \land \lnot L(x, y) )$\\
+Se realiza la sustitución $[x,y := a, b]$ sobre la matriz\\
+$ P(a) \land R(a, b) \land \lnot L(a, b) $
+
+Quinto paso: transformación a forma normal conjuntiva.
+
+\textbf{1)} $\lnot P(x) \lor \lnot G(x, y) \lor L(x, y)$ ya está en FNC.
+
+\textbf{2)} $\lnot P(x) \lor ((\lnot G(v, y) \lor R(v, y)) \land (\lnot R(v, y) \lor G(v, y)))$\\
+$\equiv (\lnot P(x) \lor \lnot G(v, y) \lor R(v, y)) \land (\lnot P(x) \lor \lnot R(v, y) \lor G(v, y))$
+
+\textbf{3)} $P(a) \land R(a, b) \land \lnot L(a, b)$ ya está en FNC.
+
+Finalmente se procederá a hacer resolución binaria.
+
+\begin{itemize}
+\item[1)] $\lnot P(x) \lor \lnot G(x, y) \lor L(x, y)$
+\item[2)] $\lnot P(x) \lor \lnot G(v, y) \lor R(v, y)$
+\item[3)] $\lnot P(x) \lor \lnot R(v, y) \lor G(v, y)$
+\item[4)] $P(a)$
+\item[5)] $R(a, b)$
+\item[6)] $\lnot L(a, b)$
+\item[7)] $\lnot P(a) \lor \lnot G(a,b)$ Res(1, 6), $[x,y := a, b]$
+\item[8)] $\lnot P(x) \lor G(a, b)$ Res(3, 5), $[v,y := a,b]$
+\item[9)] $\lnot P(a)$ Res(7, 8), $[x := a]$
+\item[10)] $\square$ Res(4, 9)
+\end{itemize}
+
+\textbf{b)}
+
+Rectificación.
+% ∃zQz → ∃w∀z(Lzz → ¬Hz)
+\textbf{1)} $\exists z Q(z) \rightarrow \exists w \forall z (L(z,z) \rightarrow \lnot H(z))$\\
+$\equiv \exists z Q(z) \rightarrow \forall x (L(x,x) \rightarrow \lnot H(x))$
+
+% ∃xBx → ∀y(Ay → Hy)
+\textbf{2)} $\exists x B(x) \rightarrow \forall y (A(y) \rightarrow H(y))$ ya está rectificada
+
+% ∀u(∃w(Qw∧Bw) → ∀y(Lyy → ¬Ay))
+\textbf{3)} $\forall u (\exists w (Q(w) \land B(w)) \rightarrow \forall y (L(y,y) \rightarrow \lnot A(y)))$\\
+$\equiv \exists w (Q(w) \land B(w)) \rightarrow \forall y (L(y,y) \rightarrow \lnot A(y))$
+
+La fórmula negada es: $\lnot (\exists w (Q(w) \land B(w)) \rightarrow \forall y (L(y,y) \rightarrow \lnot A(y)))$
+
+Forma normal negativa.
+
+\textbf{1)} $\lnot \exists z Q(z) \lor \forall x (L(x,x) \rightarrow \lnot H(x))$\\
+$\equiv \lnot \exists z Q(z) \lor \forall x (\lnot L(x,x) \lor \lnot H(x))$\\
+$\equiv \forall z \lnot Q(z) \lor \forall x (\lnot L(x,x) \lor \lnot H(x))$\\
+
+\textbf{2)} $\exists x B(x) \rightarrow \forall y (A(y) \rightarrow H(y))$\\
+$\equiv \exists x B(x) \rightarrow \forall y (\lnot A(y) \lor H(y))$\\
+$\equiv \lnot \exists x B(x) \lor \forall y (\lnot A(y) \lor H(y))$\\
+$\equiv \forall x \lnot B(x) \lor \forall y (\lnot A(y) \lor H(y))$
+
+\textbf{3)} $\lnot (\exists w (Q(w) \land B(w)) \rightarrow \forall y (L(y,y) \rightarrow \lnot A(y)))$\\
+$\equiv \exists w (Q(w) \land B(w)) \land \lnot \forall y (L(y,y) \rightarrow \lnot A(y))$\\
+$\equiv \exists w (Q(w) \land B(w)) \land \exists y \lnot (L(y,y) \rightarrow \lnot A(y))$\\
+$\equiv \exists w (Q(w) \land B(w)) \land \exists y (L(y,y) \land A(y))$
+
+Forma normal prenex
+
+\textbf{1)} $\forall z \lnot Q(z) \lor \forall x (\lnot L(x,x) \lor \lnot H(x))$\\
+$\equiv \forall z \forall x (\lnot Q(z) \lor \lnot L(x,x) \lor \lnot H(x))$\\
+
+\textbf{2)} $\forall x \lnot B(x) \lor \forall y (\lnot A(y) \lor H(y))$\\
+$\equiv \forall x \forall y (\lnot B(x) \lor \lnot A(y) \lor H(y))$
+
+\textbf{3)} $\exists w (Q(w) \land B(w)) \land \exists y (L(y,y) \land A(y))$\\
+$\exists w \exists y (Q(w) \land B(w) \land L(y,y) \land A(y))$
+
+Forma normal de Skolem
+
+\textbf{1)} $\forall z \forall x (\lnot Q(z) \lor \lnot L(x,x) \lor \lnot H(x))$\\
+$\sim \lnot Q(z) \lor \lnot L(x,x) \lor \lnot H(x)$
+
+\textbf{2)} $\forall x \forall y (\lnot B(x) \lor \lnot A(y) \lor H(y))$\\
+$\sim \lnot B(x) \lor \lnot A(y) \lor H(y)$
+
+\textbf{3} $\exists w \exists y (Q(w) \land B(w) \land L(y,y) \land A(y))$\\
+Se hace la sustitución $[w,y := a,b]$ en la matriz\\
+$Q(a) \land B(a) \land L(b,b) \land A(b)$
+
+Las fórmulas ya están en forma normal conjuntiva, así que se puede proceder a hacer resolución binaria.
+
+\begin{itemize}
+\item[1)] $\lnot Q(z) \lor \lnot L(x,x) \lor \lnot H(x)$
+\item[2)] $\lnot B(x) \lor \lnot A(y) \lor H(y)$
+\item[3)] $Q(a)$
+\item[4)] $B(a)$
+\item[5)] $L(b,b)$
+\item[6)] $A(b)$
+\item[7)] $\lnot L(x,x) \lor \lnot H(x)$ Res(1, 3), $[z:=a]$
+\item[8)] $\lnot H(b)$ Res(5, 7), $[x:=b]$
+\item[9)] $\lnot A(y) \lor H(y)$ Res(2, 4) $[x:=a]$
+\item[10)] $H(b)$ Res(6, 9) $[y:=b]$
+\item[11)] $\square$ Res(8,10)
+\end{itemize}
+
+\section*{Problema 5}
+
+Universo: $\{a, b\}$
+
+Conjuntos de predicados:
+\begin{itemize}
+\item $A: \{ a \}$
+\item $B: \{ b \}$
+\item $C: \{ b \}$
+\end{itemize}
+
+Se cumple $\exists x A(x)$, pues $a \in A$.
+
+Se cumple $\forall x (A(x) \rightarrow \lnot C(x))$, pues todos los elementos de $A$ (solo $a$) cumplen que no están en $C$ ($a \not \in C$).
+
+Se cumple $\exists y B(y)$, pues $b \in B$.
+
+Sin embargo, el consecuente es falso.
+
+Se cumple $\exists z C(z)$, pues $b \in C$. Pero no se cumple $\exists z (B(z) \land \lnot C(z))$ pues los conjuntos $B$ y $C$ son iguales.
+
+\section*{Problema 6}
+
+\textbf{a)}
+
+Se tratarán los argumentos de un predicado como una lista y se definirá la función \texttt{tsr} (términos sin repeticiones) que recibe una lista de términos y devuelve la lista con los mismos términos pero sin repeticiones.
+
+\begin{verbatim}
+tsr::[t]->[t]
+tsr [] = []
+tsr (x:xs) = let resto = tsr xs
+             in if elem x resto
+                then resto
+                else (x:resto)
+\end{verbatim}
+
+termF :: $F \rightarrow [t]$\\
+termF $\top = \emptyset$\\
+termF $\bot = \emptyset$\\
+termF ($P$ terms) = tsr terms\\
+termF ($\lnot f$) = termF $f$\\
+termF ($f1 \land f2$) = (termF $f1$) $\cup$ (termF $f2$)\\
+termF ($t1 = t2$) = $\{t1\} \cup \{t2\}$\\
+termF ($f1 \lor f2$) = (termF $f1$) $\cup$ (termF $f2$)\\
+termF ($f1 \rightarrow f2$) = (termF $f1$) $\cup$ (termF $f2$)\\
+termF ($f1 \leftrightarrow f2$) = (termF $f1$) $\cup$ (termF $f2$)\\
+termF ($\exists x f$) = termF $f$\\
+termF ($\forall x f$) = termF $f$
+
+\textbf{b)}
+
+\begin{itemize}
+\item[i)] $A = P(x)$
+\item[ii)] No puede existir una fórmula así. Pues si $A$ tiene al menos una variable libre, digamos $x$, entonces $x \in$ termF($A$), por lo que termF($A$) $\neq \emptyset$
+\item[iii)] $A = P(c) \rightarrow Q(c)$
+\item[iv)] No puede existir una fórmula que cumpla eso porque el conjunto que devuelve la función $termF$ siempre es finito.
+\end{itemize}
+
+\end{document}
+

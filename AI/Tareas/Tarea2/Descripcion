@@ -1,0 +1,18 @@
+Implementar al menos uno de:
+-Búsqueda con backtracking
+-Hillclimber
+-Recocido simulado
+-Búsqueda tabú
+-Algoritmo genético
+
+Aplicar en:
+-N reinas con N=8, 50 y 100
+-Problema de la mochila de tarea anterior
+-Max SAT (https://github.com/crillab/gophersat/tree/master/examples)
+-Coloreado de grafos (gc50_7 y gc_1000_9)
+-𝑓(𝑥_1,𝑥_2 )=𝑥_1^2+𝑥_2^2, −5≤𝑥_1,𝑥_2≤5
+-𝑔(𝑥_1,𝑥_2) =(2)(418.9829) − 𝑥_1∗sin⁡(√|𝑥_1 |)  − 𝑥_2∗sin⁡(√|𝑥_2 |)),−500≤𝑥_1,𝑥_2≤500
+
+Notas:
+Para el coloreado de grafos, la primera linea corresponde al número de vertices y aristas. Las lineas subsecuentes corresponden a las aristas del problema
+La salida del problema de coloreado de grafos debe ser: en la primera linea el número de colores utilizado y en las lineas subsecuentes el color utilizado seguido del vertice

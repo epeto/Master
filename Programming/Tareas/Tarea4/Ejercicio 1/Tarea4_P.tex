@@ -1,0 +1,80 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Tarea 4\\Programación avanzada}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+\section*{Árboles}
+
+Se explicará la razón de cada línea de salida. Cada línea viene del método \texttt{imprimirDescripcion()}, el cual muestra los atributos \texttt{tipo} y \texttt{altura} (concatenado con más texto) de un objeto de la clase Arbol.
+
+\begin{itemize}
+\item \texttt{Este es un árbol de tipo Genérico que mide 0.0 metros}
+
+La salida viene de \texttt{arbolUno}, que fue construido con parámetros vacíos. El constructor sin parámetros de la clase \texttt{Arbol} inicializa el atributo tipo en ``Genérico'', por eso se imprime ese tipo. La altura se muestra en 0.0 porque los tipos primitivos numéricos en Java se inicializan en 0 por defecto y dicho atributo no se ha modificado para el objeto \texttt{arbolUno}.
+
+\item \texttt{Este es un árbol de tipo Eucalipto que mide 0.0 metros}
+
+El objeto \texttt{arbolDos} se instancia con la cadena ``Eucalipto'' como parámetro. Por el String, se infiere que el constructor llamado es el que inicializa el tipo del árbol (\texttt{this.tipo = tipo}). En este caso, el atributo \texttt{tipo} tendrá el valor ``Eucalipto'' y por eso se imprime ese valor. En la altura se muestra 0.0 por la misma razón que en el inciso anterior.
+
+\item \texttt{Este es un árbol de tipo null que mide 3.58 metros}
+
+El objeto \texttt{arbolTres} se instancia con el número 3.58, así que se infiere que se está utilizando el constructor que recibe un double y lo coloca en el atributo de altura. La altura de este árbol es 3.58; sin embargo, el tipo del árbol nunca se inicializó, así que su valor será \texttt{null}.
+
+\item \texttt{Este árbol de tipo Pino que mide 2.5 metros}
+
+El objeto \texttt{arbolCuatro} se inicializa con el constructor que recibe dos parámetros: un String y un double. Los parámetros que recibe son ``Pino'' para el tipo y 2.5 para la altura. Para este objeto sí se inicializaron sus dos atributos, por eso en la salida se muestra ``Pino'' para el tipo y 2.5 para la altura.
+
+\end{itemize}
+
+\section*{Perros}
+
+Se explicará el contenido de la clase \texttt{Perro}.
+
+\subsection*{Atributos}
+
+La clase \texttt{Perro} sólo tiene tres atributos: \texttt{nombre}, \texttt{raza} y \texttt{peso}, y (como es de esperarse) representan el nombre, la raza y el peso de un perro.
+
+\subsection*{Constructores}
+
+\begin{itemize}
+\item \texttt{public Perro(String nombre)}
+
+Este constructor recibe una cadena de caracteres y la coloca en el atributo \texttt{nombre}. Sólo inicializa el nombre del perro.
+
+\item \texttt{public Perro(String nombre, String raza)}
+
+El constructor recibe dos parámetros de tipo String, coloca el primero en el atributo del nombre y el segundo en el atributo de la raza. No inicializa el peso (se queda en 0).
+
+\item \texttt{public Perro(String nombre, String raza, float peso)}
+
+El constructor recibe tres parámetros: dos de tipo String y uno de tipo float. El primero lo coloca en el atributo del nombre, el segundo en el atributo de la raza y el tercero en el peso.
+
+\end{itemize}
+
+\subsection*{Métodos}
+
+\begin{itemize}
+\item \texttt{describir()}
+
+Este método imprime los tres atributos de un perro con su respectiva etiqueta, ``Nombre:'', ``Raza:'' y ``Peso:''; separados por un tabulador.
+
+\item \texttt{getNombre()}
+
+Devuelve el atributo de nombre del perro.
+
+\item \texttt{ladrar()}
+
+Imprime ``woof woof...'' y luego pone entre paréntesis el nombre del perro que está ladrando, es decir, el objeto que invocó este método.
+
+\end{itemize}
+
+\end{document}
+

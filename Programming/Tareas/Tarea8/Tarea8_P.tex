@@ -1,0 +1,143 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Tarea 8\\Programación avanzada}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+\section{Ejercicios teóricos}
+
+\begin{itemize}
+\item[1.] ¿Qué elementos definen a un objeto?
+
+b) Sus atributos y sus métodos
+
+\item[2.] ¿Qué significa instanciar una clase?
+
+b) Crear un objeto a partir de la clase
+
+\item[3.] Es el área de memoria donde viven las variables locales
+
+b) The Stack
+
+\item[4.] ¿Una clase que hereda de una clase abstracta puede ser no abstracta?
+
+b) Si, si implementa todos los métodos abstractos de la superclase
+
+\item[5.] A una variable que se declara en el cuerpo de una clase con el modificador static, se le
+conoce como.
+
+b) Variable de clase
+
+\item[6.] ¿Cuál de los siguientes códigos está relacionado con la herencia en Java
+
+d) \texttt{public class Perro extends Animal}
+
+\item[7.] ¿Cuál de las lineas en el código UnaLineaMal.java nos arroja un error en compilación. (ver
+código 1).
+
+a) Línea 3
+
+\item[8.] ¿Cuál es el resultado de compilar y ejecutar el código TryCatch.java (ver código 2). Justifica
+tu respuesta
+
+d) Error en tiempo de compilación.
+
+No debe haber código entre la llave que cierra el try y el inicio del catch, pero en este caso hay una línea: \texttt{System.out.println(``El divisor es cero'');}
+
+\item[9.] Dado lo siguiente, selecciona la(s) opcion(es) correcta(s).\\
+A y E son clases.\\
+B y D son interfaces.\\
+C es una clase abstracta.
+
+a) La clase F implementa B y D.\\
+b) La clase F implementa B.\\
+d) La clase F extiende E.
+
+\item[10.] De la siguiente lista ¿Cuáles son identificadores válidos en Java?
+
+a) \$aluda\\
+e) \_saluda
+
+\item[11.] Selecciona la(s) característica(s) que describa(n) mejor a las excepciones comprobadas (checked exception) en java.
+
+b) Su captura o declaración es obligatoria.
+
+\end{itemize}
+
+\section{Preguntas abiertas}
+
+\textbf{1.} Observe la clase EjercicioHeap.java (ver código 3). Al momento de alcanzar la línea 18 (//continua), algunos objetos y algunas variables de referencia ya habrán sido creadas ¿Cuál es el estado de estas variables con respecto a los objetos?
+
+Interprétese la notación (id: $n$) como un objeto de tipo \texttt{EjercicioHeap} cuyo atributo id es $n$. Se tienen los siguientes objetos: (id: 0), (id: 1), (id: 2), (id: 7), (id: 4). Al final, cada casilla del arreglo apunta a un objeto de la siguiente forma:
+
+\begin{itemize}
+\item eh[0] $\rightarrow$ (id: 7)
+\item eh[1] $\rightarrow$ (id: 2)
+\item eh[2] $\rightarrow$ (id: 1)
+\item eh[3] $\rightarrow$ (id: 7)
+\item eh[4] $\rightarrow$ (id: 1)
+\end{itemize}
+
+\vspace{5mm}
+
+\textbf{2.} Sean las clases A,B y Test con el contenido que se muestra en el código 4. Sin modificar la clase A ni la clase Test, agregue en la clase B lo mínimo necesario con el fin de que el programa compile y ejecute exitosamente. Explique detalladamente su propuesta de solución.
+
+La clase \texttt{B} tendría el siguiente cuerpo:
+
+\begin{verbatim}
+public class B extends A{
+    public B(){
+        super('C');
+        System.out.println("B");
+    }
+}
+\end{verbatim}
+
+La clase \texttt{A} tiene un constructor protegido que puede ser invocado desde cualquier hijo de \texttt{A} y este constructor es el que recibe un caracter. Dentro del constructor de \texttt{B} se invoca a ese constructor de \texttt{A} con la palabra \texttt{super} y se le pasa como argumento el caracter \texttt{C} (aunque funciona con cualquier caracter).
+
+\vspace{5mm}
+
+\textbf{3.} Escribe con tus propias palabras de manera clara y concisa ¿Qué es la sobrecarga (overload) y la sobreescritura (override) en java?
+
+\textbf{Sobrecarga.} Una sobrecarga se da cuando dos o más métodos tienen el mismo nombre pero la firma cambia. Para que la firma cambie, los tipos de los parámetros o el número de parámetros que reciben deben ser diferentes. Una sobrecarga de dos métodos puede ocurrir en alguno de los siguientes casos:
+
+\begin{itemize}
+\item Ambos están en la misma clase.
+\item Un método está en una clase \texttt{A} y el otro en una clase \texttt{B} que es descendiente de \texttt{A}.
+\end{itemize}
+
+Un ejemplo de sobrecarga son los métodos \texttt{add} de la clase \texttt{LinkedList}. Si los elementos de la lista son de tipo \texttt{T}, el método \texttt{add(T e)} agrega un elemento al final de la lista, mientras que el método \texttt{add(int index, T e)} agrega un elemento en la posición \texttt{index} de la lista. Aunque tengan el mismo nombre los métodos son diferentes, pues uno recibe un argumento y el otro recibe dos.
+
+\textbf{Sobreescritura.} Una sobreescritura se da cuando hay dos métodos que tienen la misma firma, el tipo de retorno es el mismo pero uno está en una clase \texttt{A} y el otro en una clase \texttt{B} que es descendiente de \texttt{A}, y los métodos tienen comportamientos diferentes.
+
+Para sobreescribir un método, se debe escribir \texttt{@Override} justo arriba de la firma del método en la clase descendiente.
+
+Un ejemplo de sobreescritura es el método \texttt{hashCode} en la clase \texttt{Integer}. Este método no recibe parámetros y devuelve un \texttt{int}. La clase \texttt{Integer} es descendiente de \texttt{Object}. En la clase \texttt{Object}, el método \texttt{hashCode} toma la dirección en memoria del objeto y la transforma a un número entero. La clase \texttt{Integer} guarda exactamente un número entero y el método \texttt{hashCode} devuelve ese número.
+
+\vspace{5mm}
+
+\textbf{4.} Investiga y describe cuál es la diferencia entre String y StringBuffer. Da algunos ejemplos explicados que ayuden a clarificar la idea. (Agrega una hoja para explicación)
+
+La diferencia entre un \texttt{String} y un \texttt{StringBuffer} es que un objeto de tipo \texttt{StringBuffer} tiene métodos para su modificación mientras que uno de tipo String no. Se mostrarán ejemplos de algunos de estos métodos. Para los ejemplos, suponga que se tiene un objeto de tipo \texttt{StringBuffer} llamado \texttt{sb} cuyo valor es ``pedro''.
+
+\begin{itemize}
+\item \textbf{append}: concatena un elemento de cualquier tipo al final de la cadena. Si se ejecuta \texttt{sb.append(`` perez'')}, el valor actual de \texttt{sb} será ``pedro perez''.
+\item \textbf{delete}: Elimina la subcadena entre los índices especificados, incluyendo el primero y excluyendo al segundo. Al ejecutar \texttt{sb.delete(1, 4)}, el valor de \texttt{sb} cambia a ``po''.
+\item \textbf{insert}: Inserta un elemento en la posición indicada en la cadena. Al ejecutar \texttt{sb.insert(2, ``abc'')} su valor cambia a ``peabcdro''.
+\item \textbf{setCharAt}: Modifica el caracter en la posición indicada. Llamar al método \texttt{sb.setCharAt(4, 'a')} modifica \texttt{sb} a ``pedra''.
+\end{itemize}
+
+\section{Ejercicios prácticos}
+
+Ver directorio \texttt{CodigosT8}.
+
+\end{document}
+

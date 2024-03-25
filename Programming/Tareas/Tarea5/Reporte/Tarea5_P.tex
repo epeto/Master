@@ -1,0 +1,125 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Tarea 5\\Programación avanzada}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+\section*{MiClaseUtil}
+
+\begin{verbatim}
+/**
+ * En esta clase se define el método estático: maxInArray, que recibe un arreglo
+ * de un tipo primitivo numérico y devuelve el elemento máximo de ese arreglo.
+ */
+public class MiClaseUtil{
+    public static byte maxInArray(byte[] arr){
+        byte maximo = arr[0];
+        for(int i=1; i<arr.length; i++){
+            if(arr[i] > maximo){
+                maximo = arr[i];
+            }
+        }
+        return maximo;
+    }
+
+    public static short maxInArray(short[] arr){
+        short maximo = arr[0];
+        for(int i=1; i<arr.length; i++){
+            if(arr[i] > maximo){
+                maximo = arr[i];
+            }
+        }
+        return maximo;
+    }
+
+    public static int maxInArray(int[] arr){
+        int maximo = arr[0];
+        for(int i=1; i<arr.length; i++){
+            if(arr[i] > maximo){
+                maximo = arr[i];
+            }
+        }
+        return maximo;
+    }
+
+    public static long maxInArray(long[] arr){
+        long maximo = arr[0];
+        for(int i=1; i<arr.length; i++){
+            if(arr[i] > maximo){
+                maximo = arr[i];
+            }
+        }
+        return maximo;
+    }
+
+    public static float maxInArray(float[] arr){
+        float maximo = arr[0];
+        for(int i=1; i<arr.length; i++){
+            if(arr[i] > maximo){
+                maximo = arr[i];
+            }
+        }
+        return maximo;
+    }
+
+    public static double maxInArray(double[] arr){
+        double maximo = arr[0];
+        for(int i=1; i<arr.length; i++){
+            if(arr[i] > maximo){
+                maximo = arr[i];
+            }
+        }
+        return maximo;
+    }
+}
+\end{verbatim}
+
+\section*{Inventario y producto}
+
+\begin{verbatim}
+public class Inventario {
+
+    //Variable estática que lleva el conteo del siguiente id.
+    private static int nextId = 99;
+
+    //método que incrementa la variable de clase nextId y la devuelve.
+    public static int getNextId(){
+        nextId++;
+        return nextId;
+    }
+}
+\end{verbatim}
+
+\begin{verbatim}
+public class Producto {
+    
+    private int id; //identificador del producto
+
+    //Constructor del producto
+    public Producto(){
+        id = Inventario.getNextId();
+    }
+
+    //Devuelve el id del producto
+    public int getId(){
+        return id;
+    }
+
+}
+\end{verbatim}
+
+\section*{Pregunta}
+
+\textbf{¿Qué modificador permite que múltiples variables de una misma instancia sean compartidas a través de todos los objetos de una clase? Explica brevemente un poco sobre este.}
+
+El modificador es \texttt{static}. Al poner este modificador en una variable, ésta se vuelve una variable de la clase y no de un objeto en particular. Si un objeto escribe sobre esa variable, entonces ese valor será el mismo independientemente del objeto a través del cual se acceda a la variable.
+
+\end{document}
+

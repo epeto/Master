@@ -1,0 +1,164 @@
+Hola:
+
+Les mando la liga sobre la patente que quiero que analicen.
+Hay además,  información sobre el tema de análisis predictivo.
+
+Les mando esta liga que describe una patente sobre un invento relacionado a los modelos predictivos en el área de Data mining y de Knowledge discovery, usando arboles de decisión versus técnicas estadísticas.
+
+El ejercicio que quiero que hagan para el 9 de noviembre 2022 es que lean esta patente y me hagan una síntesis y que identifiquen en donde esta el invento, en qué consiste el invento del investigador. Observen también la forma de documentarla (es típica de un texto de patente) lo que no es común.
+
+Además es una forma de ver que se esta haciendo en el campo de data mining (y podríamos haber escogido explorar otras áreas) el revisar patentes estas viendo trabajos recientes.
+
+Hay en la descripción de la patente, una serie de puntos, sobre las aplicaciones de estos métodos.
+
+Interesante no ???? ......  me viene a la mente el premio Nobel de economía de este año que fue otorgado por trabajos relacionados a la predición en el comportamiento de instrumentos de inversión en base a no sé que algoritmos  .....  espero que se diviertan .......
+
+ Este tipo de modelos es otra forma de adquirir conocimiento (área ligada a los modelos de representación del K y a la de Machine learning en IA).
+
+LA tarea es sobre este documento:
+Patent application title: METHOD FOR CONSTRUCTING SEGMENTATION-BASED PREDICTIVE MODELS
+
+Inventors:  Edwin Peter Dawson Pednault (Cortlandt Manor, NY, US)  Ramesh Natarajan (Pleasantville, NY, US) 
+Assignees:  International Business Machines Corporation 
+IPC8 Class: AG06N502FI 
+USPC Class: 706 45 
+Class name: Data processing: artificial intelligence knowledge processing system 
+Publication date: 2009-01-29 
+Patent application number: 20090030864
+
+Liga al documento de la patente que es de interes para esta tarea: http://www.faqs.org/patents/app/20090030864#ixzz2vyrPHEc0
+
+
+USOS:
+
+[0008]Predictive modeling is an area of data mining and knowledge discovery that is specifically directed toward automatically extracting data patterns that have predictive value. In this regard, it should be discerned that constructing accurate predictive models is a significant problem in many industries that employ predictive modeling in their operations. 
+
+[0009]For example, predictive models are often used for direct-mail targeted-marketing purposes in industries that sell directly to consumers. The models are used to optimize return on marketing investment by ranking consumers according to their predicted responses to promotions, and then mailing promotional materials only to those consumers who are most likely to respond and generate revenue. 
+
+[0010]The credit industry uses predictive modeling to predict the probability that a consumer or business will default on a loan or a line of credit of a given size based on what is known about that consumer or business. The models are then used as a basis for deciding whether to grant (or continue granting) loans or lines of credit, and for setting maximum approved loan amounts or credit limits. 
+
+[0011]Insurance companies use predictive modeling to predict the frequency with which a consumer or business will file insurance claims and the average loss amount per claim. The models are then used to set insurance premiums and to set underwriting rules for different categories of insurance coverage. 
+
+OTRA INFORMACION Y TESIS RELACIONADAS:
+
+A Comparative Analysis  Of  Predictive Data-Mining Techniques 
+A Thesis 
+Presented for the 
+Master of Science Degree 
+The University of Tennessee, Knoxville 
+https://trace.tennessee.edu/utk_indupubs/19/
+
+Modelos predictivos
+
+Uso de dos bdd para la tésis.
+This thesis compares five different predictive data-mining techniques (four linear 
+techniques and one nonlinear technique) on four different and unique data sets: the 
+Boston Housing data sets, a collinear data set (called "the COL" data set in this thesis), an 
+airliner data set (called "the Airliner" data in this thesis) and a simulated data set (called 
+"the Simulated" data in this thesis). These data are unique, having a combination of the 
+following characteristics: few predictor variables, many predictor variables, highly 
+collinear variables, very redundant variables and presence of outliers
+
+Different data-mining techniques, including multiple linear regression MLR, 
+based on the ordinary least-square approach; principal component regression (PCR), an 
+unsupervised technique based on the principal component analysis; ridge regression, 
+which uses the regularization coefficient (a smoothing technique); the Partial Least 
+Squares (PLS, a supervised technique), and the Nonlinear Partial Least Squares (NLPLS), 
+which uses some neural network functions to map nonlinearity into models, were applied 
+to each of the data sets . Each technique has different methods of usage; these different 
+methods were used on each data set first and the best method in each technique was noted 
+and used for global comparison with other techniques for the same data set. 
+
+In their work, Elder et al. [72] did a comprehensive comparison of the different 
+data-mining tools (software) available now. The tools evaluated are Clementine (version 
+4), Darwin (version 3.0.1), Datacruncher (version 2.1.1), Enterprise Miner (version Beta), 
+GainSmart (version 4.0.3), Intelligent Miner (version 2), Mineset (version 2.5), Model 1 
+(version 3.1), ModelQuest (version 1), PRW (version 2.1), CART (version 3.5), 
+NeuroShell (version 3), OLPARS (version 8.1), Scenario (version 2), See5 (version 
+1.07), S-Plus (version 4), and WizWhy (version 1.1). These softwares were compared 
+according to the platform supported by the different software packages, the algorithms 
+included in the software packages, data input and model output options, usability ratings, 
+visualization capabilities and model automation. 
+
+Bases de datos libres sobre diferentes temas.:
+
+http://lib.stat.cmu.edu/datasets/
+
+Aplicaciones de SBKs 2013:
+Repositorio de Ks
+Publicada: el 17 de octubre 2013.
+http://www.faqs.org/patents/app/20130275121
+
+Background 
+
+[0002] Currently almost all the real world information that is stored on the internet is stored within documents: web pages or other files containing natural language. These documents are held on millions of computers and if linked with hypertext links are done so according to the whims of the individual authors. The documents are in a large variety of different formats and written in thousands of different natural languages. This information is unstructured. 
+
+[0003] This information is also designed for human eyes. Although natural language understanding has always been a major research area in Artificial Intelligence, computers are not capable of understanding natural language to any great extent. As a consequence, a human user wanting to find something out using the internet has to first locate a document that might have the answer and then read it. To locate the document, the only practical current technique is keyword searching. 
+
+[0004] In order to find information using keyword searching the human user first hopes that a page/document exists which answers the question, hopes again that it has been indexed by a search engine and then tries to imagine what distinctive words will appear in it. If any of the words guessed are wrong or the page has not been indexed by the search engine they will not find the page. If the combination of words requested is contained on too many other pages the page may be listed but the human user will then have to manually read through hundreds or thousands of similar documents before finding the knowledge required. 
+
+[0005] In addition there is a certain arbitrariness about the words being used. Searching for general information on a person or product with a unique, distinctive name has a high probability of success, but if the search is for someone with a common name, or for information on something where the name also means something else (searching in English for the Japanese board-game "Go" is a very good example) the search will fail, or an extraordinary amount of extra human effort will be needed to locate the information. Furthermore, different ways of describing the same thing mean that several different queries often need to be made or the search may fail. For example, a search for information on "Abraham Lincoln" is likely to produce a differing list of documents to a search based on "President Lincoln" or "Abe Lincoln". 
+
+[0006] Certain other types of queries are also extremely hard to answer with keyword searching. Examples are searching for any type of information which is dynamic. An extreme example would be the local time in a specific international city. This changes every second, so no web page indexing technique is going to be able to tell you this information at the moment of the query. Another example of a dynamic query would be to ask what the market capitalization of a company is at the current time. The answer to this depends on the precise share price of the company involved. A further example would be trying to discover the current age or marital status of a celebrity. Pages containing this information, if they were ever true, are only true at the time they were written. Search engines collect all the documents on the web and have little understanding of which contain out-of-date information. Some of these issues can be addressed with custom programming for the specific type of query at issue (e.g. adding stock quote programming to the search engine and checking for ticker symbols) but keyword indexing documents can provide no general solution. 
+
+[0007] Another problem may be that the knowledge is conceptualised in a way that is different from the way that it is described on the web page. For example, if one is trying to locate bi-monthly magazines with a search engine, one is unlikely to turn up any examples where they are described as being published "every two months". Another example would be trying to find all hotels within two kilometres of a specific geographical location. It is extremely unlikely that any description of the hotel will be expressed in exactly that form so any keyword searching for this will fail. i.e. Because search engines don't generally understand the knowledge within a document, they cannot infer new knowledge from what is said. 
+
+[0008] Another problem with natural language is that keyword searching is language specific. Automatic translation between languages is essentially an unsolved problem in Artificial Intelligence and the state of the art produces very poor results. As a consequence the web is largely partitioned by the languages used to write the pages. Someone searching in (say) Hungarian only truly has access to the knowledge stored in that part of the web which is written in the same language. 
+
+[0009] Even if a document is found that appears to answer the question, the user may not know how much faith to place in the veracity of what is asserted. The facts asserted within this document may be incorrect or out of date. No general scheme exists on the web for assessing how much confidence can be placed in the veracity of any information contained in a web page. The page could contain errors and even the authorship of the document may not be clear. 
+
+[0010] An example of a prior art search-engine interaction illustrating some of these problems is shown in FIG. 1. The user has typed a very simple question about a popular musician in the search box (102) and the search engine has responded with a list of documents (104). The web contains a very strong bias towards contemporary people, especially celebrities, and there is no shortage of information on the web which would allow a perfect system to answer this question. In fact there are many thousands of web pages with information in them suitable for answering it. However, the list of documents bears very little similarity to what is being asked and the user would have to experiment further and read through a number of documents to get an answer. 
+
+[0011] The disadvantages of keyword searching are even more extreme when the user is not human but rather an automated system such as another computer. The software within a website or other automated system needs the knowledge it requires for its processing in a form it can process. In almost all cases, documents found with keyword searching are not sufficiently processable to provide what is needed. As a consequence almost all the world's computer systems have all the knowledge they need stored in a local database in a local format. For example, automated scheduling systems wanting to know whether a particular date is a national holiday access a custom written routine to provide this information, they do not simply consult the interne to find out the answer. 
+
+[0012] Knowledge in structured form is knowledge stored in a form designed to be directly processable to a computer. It is designed to be read and processed automatically. Structured form means that it is not stored as natural language. It is knowledge stored in a pre-determined format readable and processable by the computer. Knowledge in structured form will include identifiers which denote objects in the real world and examples will include assertions of information about these identified objects. An example of such an assertion would be the assertion that an identified relationship exists between two or more identified objects or that a named attribute applies to an identified object. (Individual instances of structured knowledge are referred to herein as "facts".) 
+
+[0013] To fully understand the potential advantages of embodiments of the present invention it is also important to understand some issues relating to the broadness or narrowness of the domain of knowledge being represented. Knowledge stored in (say) a company's employee relational database may be in structured form but is in an extremely narrow domain. The representation is entirely local and only meets the needs of the narrow computer application which accesses it. Typically data stored in a computer system is designed to be used by, and can only be fully exploited by, the software within that system. In contrast, general knowledge is knowledge falling within an extremely wide domain. General knowledge stored in structured form represents general knowledge in such a way that it combines at least some of the universal meaningfulness advantages of natural language with the machine-processing advantages of other computer data. However, there are very significant difficulties to overcome to achieve this. 
+
+[0014] General knowledge in structured form has a variety of uses by a computer, including direct answering of natural language questions, and assistance with other forms of natural language processing (such as mining data from documents). It can even assist with keyword searching. For example, with the example above, if the structural knowledge exists that the strings "Abe Lincoln" and "President Abraham Lincoln" both denote the same unique entity a search engine using such a knowledge base could return documents containing either term when only one was entered by the user. 
+
+[0015] Building a large database of general structured knowledge presents serious difficulties. There are considerable difficulties in designing a knowledge representation method that is sufficiently expressive to represent a wide range of knowledge yet also sufficiently elementary in form to allow effective automated processing (such as inference and query responses). Building a knowledge base by hand (i.e. using direct human interaction as the source of the knowledge) is slow, so to build the largest possible knowledge base in a reasonable time requires a large number of people contributing. 
+
+[0016] One way to enable people to contribute is to select, hire and train salaried staff and then pay them to add this knowledge. Training them would typically require educating them about the underlying knowledge representation syntax and teaching them about what is already in the knowledge base. 
+
+[0017] However, to open up the process to the largest number of people (such as general users of the internet) requires enabling access to at least some of the knowledge addition process to untrained users. 
+
+[0018] Enabling untrained users to add general knowledge in structured form to a knowledge base presents a number of very significant problems. 
+
+[0019] First, these users are unlikely to know anything of the underlying knowledge representation technology so if untrained users are genuinely to be used, they will ideally need to be able to assert facts in a way that is natural to them and distinct from the knowledge representation format. 
+
+[0020] Secondly, these users are untrusted and potentially malicious. For this reason it isn't desirable to simply permanently add all knowledge asserted by such users to the published knowledge base. Desirably methods are needed to distinguish between true and untrue facts and to retain true facts while removing (or never publishing) untrue facts. 
+
+[0021] Thirdly, adding knowledge should desirably not require any previous knowledge of what is already in the knowledge base. If prior familiarity with the ontology or other facts that are already in the knowledge base is required, untrained users will find it more difficult to add knowledge. 
+
+[0022] All of the above issues both with knowledge representation generally and with the knowledge addition process are directly addressed in various embodiments of the present invention. 
+
+Read more: http://www.faqs.org/patents/app/20130275121#ixzz2i0TXwjQzSummary del invento
+
+[0023] Embodiments of the present invention may be considered as internet-based knowledge repositories of general knowledge, stored in structured form, to which anyone may add. Various embodiments include a static knowledge base of general knowledge stored in structured form in one or more persistent computer-accessible stores. The knowledge is represented within the static knowledge base using a structured knowledge representation method. 
+
+[0024] According to specific embodiments of the invention, a knowledge representation system is provided which includes a data store having a knowledge base stored therein comprising first knowledge represented in a structured, machine-readable format which encodes meaning. The system also includes at least one computing device operable to add second knowledge to the knowledge base. The second knowledge is generated with reference to input from a plurality of users which is not in the structured, machine-readable format. At least some of the input from the users is in a natural language. The at least one computing device is further operable to generate third knowledge not represented in the knowledge base by inferring the third knowledge from at least one of the first knowledge and the second knowledge. The at least one computing device is further operable to respond to queries using at least one of the first knowledge, the second knowledge, and the third knowledge. 
+
+[0025] According other specific embodiments, methods and apparatus are provided for facilitating addition to a knowledge base. The knowledge base includes first knowledge represented in a structured, machine-readable format which encodes meaning. At least one interface is provided by which a first user may enter information which is not in the structured, machine-readable format. At least some of the information is in a natural language. The at least one interface is operable to transmit the information to at least one remote computing device for generation of second knowledge represented in the machine-readable format for addition to the knowledge base. Responses to knowledge requests are presented using at least one of the first knowledge, the second knowledge, and third knowledge not represented in the knowledge base and inferred from at least one of the first knowledge and the second knowledge. 
+
+[0026] According to yet other specific embodiments, a computing system in a network is provided. The system includes a knowledge repository which includes first knowledge represented in a structured, machine-readable format operable to store information about any entity that can be denoted in a natural language. The system further includes at least one computing device operable to facilitate addition of second knowledge to the knowledge repository by collecting input from a plurality of users via the network using natural language requests, and translating the input to the machine-readable format. 
+
+[0027] According to further specific embodiments, a computing system in a network is provided. The system includes a knowledge repository which includes first knowledge represented in a structured, machine-readable format operable to store information about any entity that can be denoted in a natural language. The system further includes at least one computing device operable to facilitate addition of second knowledge to the knowledge repository by a plurality of users without requiring knowledge of the machine-readable format by the users. 
+
+[0028] According to additional embodiments, methods and apparatus are provided for responding to knowledge requests. A first natural language response to a first knowledge request is presented. The first natural language response is derived from knowledge represented in a structured, machine-readable format operable to store information about any entity that can be denoted in a natural language. Search results are presented in response to a second knowledge request where a second natural language response derived from the knowledge is not available. The search results include a plurality of natural language documents identified using a conventional search engine 
+
+[0029] According to other additional embodiments, methods and apparatus are provided for responding to a knowledge request. A natural language response to the knowledge request is presented. The natural language response is derived from knowledge represented in a structured, machine-readable format operable to store information about any entity that can be denoted in a natural language. Search results are presented in conjunction with the natural language response. The search results include a plurality of natural language documents retrieved using a conventional search engine. 
+
+[0030] According to yet further embodiments, methods and apparatus are provided for facilitating addition of a first entity to a knowledge base by a first human user. Identification by the first human user of a class to which the first entity belongs is facilitated. Generation by the first human user of at least one first natural language string denoting the first entity is facilitated. Generation by the first human user of at least one second natural language string corresponding to the first entity is facilitated. The at least one second natural language string is specified to facilitate unique recognition of the first entity by humans. Transmission is facilitated of data representing the class and the first and second natural language strings for storage in a knowledge base in association with an identifier uniquely identifying the first entity within the knowledge base. According to one such embodiment, at least one third natural language string is presented to the first human user. The at least one third natural language string corresponds to a second entity represented in the knowledge base and is specified to facilitate unique recognition of the second entity by humans. Verification by the first human user that the first entity is distinct from the second entity is facilitated with reference to the at least one third natural language string. 
+
+[0031] A further understanding of the nature and advantages of embodiments of the present invention may be realized by reference to the remaining portions of the specification and the drawings. 
+
+Patentes que involucra lenguaje natural ,..... etc.
+Read more: http://www.faqs.org/patents/app/20130275121#ixzz2i0SxOb53
+
+Patente sobre compresión de datos
+Read more: http://www.faqs.org/patents/app/20090030864#ixzz2hzjM8ou8
+
+
+Saludos,,
+Sergio Marcellin

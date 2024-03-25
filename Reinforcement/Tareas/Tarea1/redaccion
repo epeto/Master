@@ -1,0 +1,19 @@
+
+Desarrollar en python lo siguiente:
+
+MDPs
+(20 puntos) Utilizar frozen lake de Gymnasium con is_slippery=True (https://gymnasium.farama.org/environments/toy_text/frozen_lake/)
+(20 puntos) MDP del juego de gato con rival aleatorio con γ=1
+
+Algoritmos
+(25 puntos) Iteración de valor
+(25 puntos) Iteración de política
+
+Pruebas
+Aplicar ambos algoritmos a los dos MDPs
+(10 puntos) Para cada algoritmo mostrar v^∗ (s) y π^∗ (a|s) explícitamente
+
+Entregable
+Código reproducible con ambos algoritmos y MDPs
+PDF con v^∗ (s) y π^∗ (a|s) encontrado por cada algoritmo/MDP
+

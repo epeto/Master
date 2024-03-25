@@ -1,0 +1,150 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Tarea 7\\Algoritmos}
+\author{Emmanuel Peto Gutiérrez\\José Luis Vázquez Lázaro}
+\begin{document}
+\maketitle
+
+\section*{Problema 2}
+
+\textbf{a)}
+
+Sea $L(i,j)$ la longitud de la subsecuencia palindrómica más larga para una secuencia $A$ en el subarreglo $A[i...j]$.
+
+Se define $L(i,j)$ de forma recursiva de la siguiente manera:
+
+\[
+L(i, j) = \left\{ \begin{array}{lcc}
+             0 & \text{si} & i>j \\
+             1 &  \text{si} & i=j \\
+             2+L(i+1,j-1) & \text{si} & A[i]=A[j] \text{ con } i<j\\
+             \max(L(i+1, j), L(i, j+1)) & \text{si} & A[i] \neq A[j] \text{ con } i<j
+             \end{array}
+   \right.
+\]
+
+Demostración por inducción.
+
+\underline{Caso base 1:} $i>j$
+
+Se considera que un subarreglo $A[i...j]$ es vacío cuando $i>j$. Entonces la longitud de cualquier cadena será 0 si $i>j$ y se define $L(i, j)=0$ para este caso, por lo que la definición es correcta.
+
+\underline{Caso base 2:} $i=j$
+
+Un subarreglo $A[i...j]$ tiene longitud 1 cuando $i=j$. Cualquier cadena de longitud 1 es palíndroma y se define $L(i,j)=1$ cuando $i=j$, por lo que en este caso la definición es correcta.
+
+\underline{H.I.} Supongamos que la definición de $L(k,l)$ es correcta cuando $i \leq k \leq l \leq j$ y $|A[k...l]| < |A[i...j]|$.
+
+Se demostrará que $L(i, j)$ es la longitud del palíndromo más largo formado por una subsecuencia de $A[i...j]$.
+
+\underline{Subcaso 1: $A[i]=A[j]$}.
+
+Sea $p$ el palíndromo más largo formado por una subsecuencia de $A[i+1...j-1]$. Entonces, se puede construir un palíndromo más largo que sea subsecuencia de $A[i...j]$ simplemente concatenando el caracter $A[i]$ (o $A[j]$) en ambos lados de $p$: $A[i]++p++A[j]$.
+
+Por H.I., $|p|=L(i+1, j-1)$, entonces $|A[i]++p++A[j]| = |p|+2 = L(i+1, j-1)+2$. Para este caso, se define $L(i, j) = L(i+1, j-1)+2$, y por lo tanto la definición es correcta.
+
+\underline{Subcaso 2: $A[i] \neq A[j]$}.
+
+En este caso, se sabe que no pueden ser ambas ($A[i]$ y $A[j]$) extremos del mismo palíndromo, pues son caracteres diferentes. Así que simplemente se calcula la longitud del palíndromo más largo formado con $A[i...j-1]$ y el más largo formado con $A[i+1...j]$, los cuales, por H.I. serán $L(i,j-1)$ y $L(i+1,j)$.
+
+El palíndromo más largo formado con $A[i...j]$ será el más largo entre el formado por $A[i...j-1]$ y el formado por $A[i+1...j]$. La longitud de ese palíndromo será $\max (L(i,j-1), L(i+1,j))$ y así se define $L(i,j)$, por lo que la definición es correcta. $\blacksquare$
+
+\textbf{b)}
+
+Supongamos que existe una función \texttt{buildMat(n)} que construye una matriz de $n \times n$ con todas sus entradas en -1. Entonces las siguientes funciones en python calculan la longitud de la subsecuencia más larga que es palindrómica. \texttt{longMaxPal} la calcula para la subcadena de $i$ a $j$ y \texttt{longMaxPal2} lo calcula para la cadena completa.
+
+\begin{lstlisting}[language=Python]
+ 1: def longMaxPal(cadena, i, j, matriz):
+ 2:     if matriz[i][j] == -1:
+ 3:         if i>j:
+ 4:             matriz[i][j] = 0
+ 5:         elif i==j:
+ 6:             matriz[i][j] = 1
+ 7:         else:
+ 8:             if cadena[i] == cadena[j]:
+ 9:                 matriz[i][j] = 2 + longMaxPal(cadena, i+1, j-1, matriz)
+10:             else:
+11:                 v1 = longMaxPal(cadena, i+1, j, matriz)
+12:                 v2 = longMaxPal(cadena, i, j-1, matriz)
+13:                 matriz[i][j] = max(v1, v2)
+14:     return matriz[i][j]
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+1: def longMaxPal2(cadena):
+2:     n = len(cadena)
+3:     matriz = buildMat(n)
+4:     return longMaxPal(cadena, 0, n-1, matriz)
+\end{lstlisting}
+
+
+La correctez es inmediata de la ecuación definida en el inciso \textbf{a)}  ($L(i,j)$).
+
+Ahora analizaremos la complejidad.
+
+Observe que, salvo por las llamadas recursivas, se realizan un número constante de operaciones dentro de la función \texttt{longMaxPal}. La condición del if \texttt{matriz[i][j] == -1} va a ser verdadera exactamente una vez para cada par $(i, j)$. Eso significa que se calcula cada entrada de la matriz exactamente una vez. Como es una matriz de $n \times n$ entonces se realizan $O(n^2)$ operaciones en total.
+
+\textbf{c)}
+
+El siguiente código en python calcula la longitud de la subsecuencia palindrómica más larga.
+
+\begin{lstlisting}[language=Python]
+ 1: def longMPIt(cadena):
+ 2:     n = len(cadena)
+ 3:     matriz = buildMat(n)
+ 4:     for i in range(n-1, -1, -1):
+ 5:         for j in range(n):
+ 6:             if i>j:
+ 7:                 matriz[i][j] = 0
+ 8:             elif i==j:
+ 9:                 matriz[i][j] = 1
+10:             else:
+11:                 if cadena[i] == cadena[j]:
+12:                     matriz[i][j] = 2 + matriz[i+1][j-1]
+13:                 else:
+14:                     v1 = matriz[i+1][j]
+15:                     v2 = matriz[i][j-1]
+16:                     matriz[i][j] = max(v1, v2)
+17:     return matriz[0][n-1]
+\end{lstlisting}
+
+La correctez es inmediata del inciso anterior.
+
+La complejidad es $O(n^2)$ al igual que en la versión recursiva.
+
+\textbf{d)}
+
+Supongamos que la función \texttt{longMPIt} devuelve no sólo la entrada $(0, n-1)$ de \texttt{matriz} sino que devuelve la matriz completa. También supongamos que existe una función \texttt{buildMat2(n)} que construye una matriz de $n \times n$ donde todas sus entradas son cadenas vacías.
+
+La siguiente función \texttt{construyePML(cadena)} construye la subsecuencia palindrómica más larga dada una cadena.
+
+\begin{lstlisting}[language=Python]
+ 1: def construyePML(cadena):
+ 2:     matLongs = longMPIt(cadena)
+ 3:     n = len(cadena)
+ 4:     matCads = buildMat2(n)
+ 5:     for i in range(n-1, -1, -1):
+ 6:         for j in range(n):
+ 7:             if i==j:
+ 8:                 matCads[i][j] = cadena[i]
+ 9:             elif i<j:
+10:                 if cadena[i] == cadena[j]:
+11:                     letra = cadena[i]
+12:                     matCads[i][j] = letra + matCads[i+1][j-1] + letra
+13:                 else:
+14:                     if matLongs[i+1][j] > matLongs[i][j-1]:
+15:                         matCads[i][j] = matCads[i+1][j]
+16:                     else:
+17:                         matCads[i][j] = matCads[i][j-1]
+18:     return matCads[0][n-1]
+\end{lstlisting}
+
+\end{document}
+

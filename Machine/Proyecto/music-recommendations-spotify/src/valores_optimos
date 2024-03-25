@@ -1,0 +1,39 @@
+Para redes neuronales:
+
+ Configuration(values={
+  'activation': 'tanh',
+  'batch_size': 214,
+  'learning_rate_init': 0.005599223654063347,
+  'n_layer': 4,
+  'n_neurons': 66,
+  'solver': 'adam',
+})
+
+Para random forest:
+
+Configuration(values={
+  'max_depth': 18,
+  'min_samples_leaf': 1,
+  'min_samples_split': 2,
+  'n_estimators': 1861,
+})
+
+Validacion cruzada: [0.38676845 0.43002545 0.45547074 0.44897959 0.45153061] para {'max_depth': 18, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 1861}
+Validacion cruzada: [0.38422392 0.42748092 0.44529262 0.43877551 0.44642857] para {'max_depth': 18, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 1861}
+Validacion cruzada: [0.39440204 0.42239186 0.44529262 0.44642857 0.45408163] para {'max_depth': 18, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 1861}
+
+Para Adaboost:
+
+Configuration(values={
+  'learning_rate': 0.1212187106160905,
+  'n_estimators': 249,
+})
+
+Validacion cruzada: [0.35114504 0.37913486 0.43002545 0.38010204 0.3494898 ] para {'learning_rate': 0.1212187106160905, 'n_estimators': 249}
+Validacion cruzada: [0.35114504 0.37913486 0.43002545 0.38010204 0.3494898 ] para {'learning_rate': 0.1212187106160905, 'n_estimators': 249}
+Validacion cruzada: [0.35114504 0.37913486 0.43002545 0.38010204 0.3494898 ] para {'learning_rate': 0.1212187106160905, 'n_estimators': 249}
+
+Configuración anterior de adaboost:
+AdaBoostClassifier(n_estimators=1042, learning_rate=0.02689572863765061, random_state=0)
+
+

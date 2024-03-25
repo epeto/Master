@@ -1,0 +1,6 @@
+\babel@toc {spanish}{}\relax 
+\beamer@sectionintoc {1}{Descripción del problema}{2}{0}{1}
+\beamer@sectionintoc {2}{Análisis léxico y sintáctico}{7}{0}{2}
+\beamer@sectionintoc {3}{Análisis de términos}{10}{0}{3}
+\beamer@sectionintoc {4}{Análisis de fórmulas}{11}{0}{4}
+\beamer@sectionintoc {5}{Locally nameless representation}{14}{0}{5}

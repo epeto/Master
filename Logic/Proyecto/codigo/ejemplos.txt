@@ -1,0 +1,6 @@
+"∀x[∀y[∃z[P(vx,vy)→Q(vz,ff(vx))]]]"
+"∀xP(ff(vx))"
+"∀x[∀y[∃z[P(ff(fh(ca,vx,fg(fi(vy))),vz,cb))]]]"
+"I(cj,co)∧(C(cj,vt)∧(C(cj,cc)∧(K(vt,vx)∧K(cc,vy))))"
+"∀x[R(vz,vx)⇔((∀y[P(vx)∧Q(vx,vy)])∨T(ca))]"
+"∀x[∃z[Q(vy,vz)∨R(vz,vx,vy)]]∧P(vu,vv)"

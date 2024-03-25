@@ -1,0 +1,69 @@
+\textbf{2.}
+
+\textbf{a)}
+
+Se va a suponer que se tiene una función llamada \textsc{Convolucion(A,B)} que recibe dos vectores $A$ y $B$ de tamaño $m$ y $n$, respectivamente, y calcula la convolución de ambos usando la transformación rápida de Fourier. Es decir, devuelve un vector $C$ de tamaño $m+n-1$ que cumple \[C[k] = \sum_{k=i+j} A[i] \times B[j]\] para $0 \leq k < m+n-1$.
+
+Supongamos que el algoritmo recibe un vector $Q = [q_0, q_1, ..., q_{n-1}]$ con las cargas de las partículas y el resultado se va a devolver en un vector $F = [F_0, F_1, ..., F_{n-1}]$. También recibe la constante $c$.
+
+Sea $fun(i, n)$ la función definida a trozos de la siguiente manera:
+\[fun(i, n) = \left\{
+\begin{array}{c l}
+ -\frac{c}{(n-1-i)^2} & \text{ si } i < n-1\\
+ 0 & \text{ si } i=n-1\\
+\frac{c}{(n-1-i)^2} & \text{ si } i>n-1
+\end{array}
+\right.\]
+
+A continuación se definen los pasos del algoritmo.
+\begin{itemize}
+\item[1)] Construir un vector $B$ de tamaño $2n-1$ donde $B[i] = fun(i,n)$ para $0 \leq i < n$, donde $n$ es el número de partículas. El vector $B$ tendrá la siguiente forma: \[B = [-\frac{c}{n-1}, -\frac{c}{n-2}, ..., -\frac{c}{4}, -c, 0, c, \frac{c}{4}, ..., \frac{c}{n-2}, \frac{c}{n-1}]\]
+
+\item[2)] Calcular la convolución de $Q$ con $B$ y colocar el resultado en un vector $rconv$.
+
+\item[3)] Los primeros $n-1$ valores del vector $rconv$ no importan y tampoco importan los últimos $n-1$ valores, así que solo se considerarán los valores en el subarreglo $rconv[n-1 ... 2(n-1)]$. En el último paso del algoritmo se calcula $F_i = q_i*rconv[i+n-1]$ para $0 \leq i < n$.
+
+\end{itemize}
+
+En el Algoritmo \textsc{FuerzaParticulas} se muestra un pseudocódigo, entendiendo que la función \textsc{$V$.Append($x$)} agrega $x$ al final del vector $V$.
+
+\begin{algorithm}[htbp]
+
+$n$ = $Q$.length\;
+Crear vector $F$ de tamaño $n$\;
+$B = \emptyset$\;
+\For{$i=-n+1;$ $i<n;$ $i++$}{
+  \uIf{$i < 0$}{
+    $B$.\textsc{Append}($-\frac{c}{i^2}$)\;
+  }
+  \uElseIf{$i == 0$}{
+    $B$.\textsc{Append}(0)\;
+  }
+  \Else{$B$.\textsc{Append}($\frac{c}{i^2}$)\;}
+}
+$rconv = $ \textsc{Convolucion}($Q$, $B$)\;
+\For{$i=0;$ $i<n;$ $i++$}{
+  $F[i] = Q[i]*rconv[n-1+i]$\;
+}
+return $F$\;
+
+\caption{\textsc{FuerzaParticulas($Q$, $c$)}}
+
+\end{algorithm}
+
+\textbf{b)}
+
+Se va a suponer que la función \textsc{Convolucion($A$, $B$)} es correcta.
+
+Cada entrada $k$ del vector $rconv$ tiene la forma: \[rconv[k] = \sum_{k=i+j | 0 \leq i<n, 0 \leq j<2n-1} q_i*b_j\] Donde $B[j] = b_j$. Los únicos valores de $k$ utilizados son los que están en el rango $[n-1, 2(n-1)]$.
+
+Sea $k$ un número fijo (y entero) en el rango $[n-1, 2(n-1)]$. Para fines prácticos, supongamos que $q_i = 0$ si $i \geq n$. Si se tiene una $k$ fija y se buscan todos los números $i, j$ tal que $i+j = k$, entonces se puede iterar desde $i=0, j=k$, incrementar $i$ en 1 hasta que sea $k$ y al mismo tiempo decrementar $j$ en 1 hasta que se haga 0. Así, el valor de $rconv[k]$ es: \[rconv[k] = \sum_{i=0, j=k}^{i=k, j=0} q_i*b_j\]
+
+Como $b_j=fun(j,n)$ y $j=k-i$ entonces $b_j=fun(k-i,n)$, así que se puede reescribir la suma de la siguiente forma: \[rconv[k] = \sum_{i=0}^{i=k} fun(k-i,n)\] y por la definición de $fun$ se tiene que \[rconv[k] = \sum_{i<k} \frac{cq_i}{(k-i)^2} + \sum_{i>k} \frac{-cq_i}{(k-i)^2}\]
+
+Luego, se multiplica $rconv[k]$ por $q_k$ y así se obtiene el resultado deseado para $F[k]$. $\blacksquare$
+
+\textbf{c)}
+
+Ahora se analizará la complejidad del algoritmo. Construir el vector $B$ tiene complejidad $O(n)$. Realizar convolución con la transformación rápida de Fourier de los vectores $Q$ y $B$ tiene complejidad $O(n \log n)$. Finalmente, calcular los valores del vector $F$ usando los vectores $rconv$ y $Q$ tiene complejidad $O(n)$. Así que la complejidad total del algoritmo es $O(n) + O(n \log n) + O(n) = O(n \log n)$. $\blacksquare$
+

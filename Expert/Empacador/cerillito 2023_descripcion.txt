@@ -1,0 +1,234 @@
+
+Modelo de Representacion del K basado en reglas de producción y
+EJEMPLO del Cerillito:
+TAREA: Programar el sistema basado en reglas de producción del cerillito
+
+INTRODUCCIÓN:
+
+Rules
+The components of a rule-based system have the form:
+if <condition> then <conclusion>
+Rules can be evaluated by:
+backward chaining
+forward chaining
+
+Backward Chaining
+To determine if a decision should be made, work backwards looking for justifications for the decision. 
+Eventually, a decision must be justified by facts.
+ 
+Forward Chaining
+Given some facts, work forward through inference net. 
+Discovers what conclusions can be derived from data. 
+
+ Forward Chaining 2
+Until a problem is solved or no rule's 'if' part is satisfied by the current situation: 
+1.Collect rules whose 'if' parts are satisfied. 
+2.If more than one rule's 'if' part is satisfied, use a conflict resolution strategy to eliminate all but one. 
+3.Do what the rule's 'then' part says to do. 
+ 
+Production Rules
+A production rule system consists of a set of rules,a working memory that stores temporary data  and
+a forward chaining inference engine 
+Match-Resolve-Act Cycle
+The match-resolve-act cycle is what the inference engine does.
+
+loop 
+match conditions of rules with contents of working memory 
+if no rule matches then stop
+resolve conflicts
+act (i.e. perform conclusion part of rule) 
+end loop 
+_____________
+
+EJEMPLO:
+BAGGER (CERILLITO)
+-Bagger is a simple rule-based system that describes how to pack items at a supermarket check-out. 
+-While explaining Bagger, we shall describe a number of potential strategies for conflict resolution. 
+-Baggers working memory has an associated table of attributes of the objects (stock items) at the supermarket. 
+-There are 4 steps in Bagger, and Bagger uses a Working Memory item called Step to keep track of where it is up to. 
+-Each rule checks the value of Step as part of its if part, and will be applicable only to one of the four steps. 
+-This makes it easier to be sure that the rules will not interact in unexpected ways (a pitfall in creating rule-based systems).
+
+Steps in Bagger
+1.Check order: Check what the customer has selected; look to see if something is missing, suggest additions.
+2.Pack large items:Put the large items in the bag; put big bottles first.
+3.Pack medium items:Put in the medium sized items; put frozen food in plastic bags.
+4.Pack small items:Put in the small items wherever there is room.
+
+_____________
+Working Memory
+Step: Check order
+Bag1:
+Unpacked: Bread
+Glop
+Granola (2)
+Ice cream
+Chips
+
+Attributes of Objects
+ITEM	CONTAINER_TYPE	SIZE	FROZEN?
+Bread	Plastic bag	Medium	No
+Glop	Jar		Small	No
+Granola	Cardboard box	Large	No
+Icecrea	Cardboard cartonMedium	Yes
+Pepsi	Bottle		Large	No
+Chips	Plastic bag	Medium	No
+
+Rules for Step 1
+
+B1:
+if the step is check-order
+and there is a bag of chips
+and there is no soft-drink bottle
+then add one bottle of soft drink to the order
+
+B2:
+if the step is check-order
+then discontinue the check-order step
+andstart the pack-large-items step
+
+Which of these rules should be chosen when in the check order step?
+
+Conflict Resolution
+
+Specificity Ordering 
+	If a rules condition part is a superset of another, use the first rule since it is more specialised for the current task. 
+Rule Ordering 
+	Choose the first rule in the text, ordered top-to-bottom. 
+Data Ordering 
+	Arrange the data in a priority list. Choose the rule that applies to data that have the highest priority. 
+Size Ordering 
+	Choose the rule that has the largest number of conditions. 
+Recency Ordering 
+	The most recently used rule has highest priority or
+	the least recently used rule has highest priority or
+	the most recently used datum has highest priority or
+	the least recently used datum has highest priority.
+______________
+Recency Ordering of Rules for Conflict Resolution
+This means that there are 4 variants of the recency ordering conflict resolution strategy.
+
+Variant 1: order the rules by recency of use and choose the most recently used (eligible) rule.  
+Variant 2: order the rules by recency of use and choose the least recently used (eligible) rule.  
+
+The second pair of variants require that one keep track of the rules that have been used and form a list of the data that are mentioned in those rules in recency order.
+
+Variant 3: order the currently eligible rules according to the recency with which the datum or data to which they refer have been used, and choose the most recent such rule.
+
+Variant 4: order the currently eligible rules according to the recency with which the datum or data to which they refer have been used, and choose the least recent such rule.
+______________
+Context Limiting 
+Reduce the likelihood of conflict by separating the rules into groups, only some of which are active at any one time. Have a procedure that activates and deactivates groups. 
+_____________
+Rules for Step 2
+B3:
+if the step is pack-large-items
+and there is a large item to be packed
+and there is a large bottle to be packed
+and there is a bag with < 6 large items
+then put the bottle into the bag
+
+B4:
+if the step is pack-large-items
+and there is a large item to be packed
+and there is a bag with < 6 large items
+then put the large item into the bag
+
+B5:
+if the step is pack-large-items
+and there is a large item to be packed
+then get a new bag
+
+B6:
+if	the step is pack-large-items
+then	get a new bag
+
+Working Memory So Far
+Step:pack-medium-items
+Bag1:Pepsi
+Granola (2)
+Unpacked:
+Bread
+Glop
+Ice cream
+Chips
+_______________
+Rules for Step 3
+
+B7:
+if the step is pack-medium-items
+and there is a medium item to be packed
+and there is an empty bag or a bag with medium items (only)
+and the bag is not yet full
+and the medium item is frozen
+and the medium item is not in a freezer bag
+then put the medium item in a freezer bag
+
+B8:
+ifthe step is pack-medium-items
+andthere is a medium item to be packed
+andthere is an empty bag or a bag with medium items
+andthe bag is not yet full
+thenput the medium item in the bag
+
+B9:
+ifthe step is pack-medium-items
+andthere is a medium item to be packed
+thenget a new bag
+
+B10:
+ifthe step is pack-medium-items
+thendiscontinue the pack-medium-items step
+andstart the pack-small-items step
+__________________
+Working Memory So Far
+Step:pack-small-items
+Bag1:
+Pepsi
+Granola (2)
+Bag2:
+Bread
+Ice cream (in freezer bag)
+Chips
+Unpacked:Glop
+___________
+Rules for Step 4
+
+B11:
+ifthe step is pack-small-items
+andthere is a small item to be packed
+andthe bag is not yet full
+andthe bag does not contain bottles
+thenput the small item in the bag
+
+B12:
+ifthe step is pack-small-items
+andthere is a small item to be packed
+andthe bag is not yet full
+thenput the small item in the bag
+
+B13:
+ifthe step is pack-small-items
+andthere is a small item to be packed
+thenget a new bag
+
+B14:
+ifthe step is pack-small-items
+thendiscontinue the pack-small-items step
+andstop
+
+Summary: Rule-Based Systems 
+Rule-based systems consist of a set of rules, a working memory and an inference engine. 
+The rules encode domain knowledge as simple condition-action pairs. 
+The working memory initially represents the input to the system, but the actions that occur when rules are fired 
+can cause the state of working memory to change. 
+The inference engine must have a conflict resolution strategy to handle cases where more than one rule is eligible to fire. 
+
+REFERENCIAS:
+http://clipsrules.sourceforge.net/
+http://luisguillermo.com/Curso-IA-UPB/clips-castellano.pdf
+https://www.cs.us.es/cursos/ia2-2003/temas/tema-01-I.pdf
+Lenguaje:Python.org
+
+Nota: 6 artículos máximo por bolsa.
+

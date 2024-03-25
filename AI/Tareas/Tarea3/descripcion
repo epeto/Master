@@ -1,0 +1,10 @@
+- Lógica: (40 puntos) Resolver los ejercicios del PDF adjunto
+
+- Redes bayesianas
+(20 puntos) Reproducir en notebook encontrado en; https://pgmpy.org/detailed_notebooks/2.%20Bayesian%20Networks.html
+(20 puntos)  Realizar los cambios necesarios para trabajar con el problema de la alarma visto en clase y resuelva P(Burglary | JohnCalls =true, MaryCalls =true) .
+
+- (10 puntos) Critique el siguiente artículo https://github.com/RussAbbott/pylog/blob/master/WI%202020%20paper/IMCIC_21.pdf 
+- (10 puntos) Seleccione uno de los códigos de (https://github.com/RussAbbott/pylog/tree/master/pylog/examples) ejecutelo y de su opinión comparandolo con la forma en que los habría resuelto con las herramientas vistas en clase
+- (10 puntos extra) Vídeo de máximo 10 minutos explicando ejercicio de los temas vistos en clase
+

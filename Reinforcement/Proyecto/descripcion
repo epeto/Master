@@ -1,0 +1,25 @@
+
+Realizar lo siguiente:
+(20 puntos max) Implementar Q learning para tratar estados y acciones continuas con una de las siguientes formas:
+- (10 puntos) Discretización
+- (15 puntos) Regresión lineal en batch
+- (20 puntos) Red neuronal en batch
+
+(20 puntos max) Implementar una política con alguna de las siguientes formas:
+- (10 puntos) epsilon-greedy
+- (15 puntos) Inicialización optimista
+- (20 puntos) UCB1
+
+(20 puntos) Entrenar el algortimo en el problema de control
+(20 puntos) Probar el algoritmo en algortimo en el problema de control
+Entregar reporte con
+(10 puntos) Descripción del MDP para el problema de control
+(5 puntos) Gráficas de recompensa promedio por episodio
+(5 puntos) Gráfica de recompensa de la política encontrada
+Entregar
+Código
+Parámetros utilizados
+Reporte
+Presentación de resultados con los mismos puntos del reporte
+
+

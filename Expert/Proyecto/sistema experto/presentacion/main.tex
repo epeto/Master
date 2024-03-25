@@ -1,0 +1,125 @@
+\documentclass[11pt, aspectratio=169]{beamer}
+\mode<beamer>{
+\usetheme[hideothersubsections,
+right,width=22mm]{Goettingen}
+}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{hyperref}
+\title{Sistema de recomendación de recetas de cocina}
+\author{Emmanuel Peto Gutiérrez}
+\institute{IIMAS \\ UNAM}
+\begin{document}
+
+\begin{frame}<handout:0>
+\titlepage
+\end{frame}
+
+\section{El conjunto de datos}
+
+% Frame
+\begin{frame}
+\frametitle{El conjunto de datos}
+
+El dataset se llama \textit{Food.com Recipes and Interactions} y se obtuvo de Kaggle.
+
+Se dividió el conjunto de recetas en las siguientes tablas:
+
+\begin{itemize}
+\item \textbf{ingredients}: ingredientes de una receta.
+\item \textbf{nutrition}: contenido nutricional de una receta, como la cantidad de carbohidrados.
+\item \textbf{recipes}: tabla principal. Contiene el nombre de las recetas (y otras cosas).
+\item \textbf{steps}: los pasos a seguir para una receta.
+\item \textbf{tags}: etiquetas que los usuarios le ponen a las recetas.
+\end{itemize}
+
+\end{frame}
+
+\section{La consulta}
+
+% Frame
+\begin{frame}
+\frametitle{Consulta 1: agregar o excluir}
+
+En la primera parte del sistema experto se realiza la consulta a la base de datos para obtener los ids de las recetas.
+
+Las dos primeras acciones son:
+\begin{itemize}
+\item Agregar: para seleccionar recetas que contengan solamente los ingredientes especificados por el usuario.
+\item Exluir: elimina las recetas que contengan ciertos ingredientes.
+\end{itemize}
+
+\end{frame}
+
+% Frame
+\begin{frame}
+\frametitle{Consulta 2: categoría}
+
+Luego, el usuario selecciona una categoría (o tag) para hacer otro filtro.
+
+El tag puede representar una característica no nutrimental de la receta, como si es comida asiática, vegana o si es desayuno.
+
+\end{frame}
+
+% frame
+\begin{frame}
+\frametitle{Consulta 3: nutrición}
+
+El último paso para la consulta es sobre la tabla de nutrición. Si elige alguna columna de la tabla de nutrición, se seleccionarán solamente aquellas recetas que tengan un valor en esa columna debajo del promedio.
+
+Las columnas de nutrición son:
+\begin{itemize}
+\item calories
+\item total\_fat
+\item sugar
+\item sodium
+\item protein
+\item saturated\_fat
+\item carbohydrates
+\end{itemize}
+
+\end{frame}
+
+\section{El plan}
+
+% frame
+\begin{frame}
+\frametitle{El plan}
+
+Una vez que se realizó la consulta a la base de datos, se toma una muestra del resultado y se organizan los datos en otros archivos.
+
+\begin{itemize}
+\item Una receta: si se elige esta opción, se guardan 10 opciones de recetas en un archivo en una sola columna.
+\item Un día: se crean 3 columnas (desayuno, comida y cena) y cada columna tiene 3 opciones de recetas.
+\item Una semana: se crean 5 columnas y cada columna tiene 3 recetas.
+\end{itemize}
+
+\end{frame}
+
+\section{Ingredientes y pasos}
+
+% frame
+\begin{frame}
+\frametitle{Los ingredientes}
+
+Cuando ya se tiene un plan de recetas, se pueden obtener los ingredientes.
+
+Se tienen dos opciones:
+
+\begin{itemize}
+\item Obtener todos los ingredientes del plan.
+\item Obtener los ingredientes de una receta, dado su id.
+\end{itemize}
+
+\end{frame}
+
+% frame
+\begin{frame}
+\frametitle{Los pasos}
+
+Finalmente se muestra en pantalla la lista de pasos que el usuario debe seguir para realizar la receta.
+
+\end{frame}
+
+\end{document}
+

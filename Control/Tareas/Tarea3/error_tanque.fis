@@ -1,0 +1,53 @@
+[System]
+Name='error_tanque'
+Type='sugeno'
+Version=2.0
+NumInputs=1
+NumOutputs=2
+NumRules=7
+AndMethod='prod'
+OrMethod='probor'
+ImpMethod='prod'
+AggMethod='sum'
+DefuzzMethod='wtaver'
+
+[Input1]
+Name='error'
+Range=[-2 2]
+NumMFs=7
+MF1='NB':'zmf',[-1 -0.75]
+MF2='NM':'gaussmf',[0.25 -0.75]
+MF3='NS':'gaussmf',[0.2 -0.3]
+MF4='Z':'gaussmf',[0.1 0]
+MF5='PS':'gaussmf',[0.2 0.3]
+MF6='PM':'gaussmf',[0.25 0.75]
+MF7='PB':'smf',[0.75 1]
+
+[Output1]
+Name='V1'
+Range=[0 1]
+NumMFs=5
+MF1='FDR':'constant',[0]
+MF2='Z':'constant',[0.25]
+MF3='S':'constant',[0.5]
+MF4='M':'constant',[0.75]
+MF5='B':'constant',[1]
+
+[Output2]
+Name='V2'
+Range=[0 1]
+NumMFs=5
+MF1='FDR':'constant',[0]
+MF2='Z':'constant',[0.25]
+MF3='S':'constant',[0.5]
+MF4='M':'constant',[0.75]
+MF5='B':'constant',[1]
+
+[Rules]
+1, 1 5 (1) : 1
+2, 1 4 (1) : 1
+3, 1 3 (1) : 1
+4, 2 2 (1) : 1
+5, 3 1 (1) : 1
+6, 4 1 (1) : 1
+7, 5 1 (1) : 1

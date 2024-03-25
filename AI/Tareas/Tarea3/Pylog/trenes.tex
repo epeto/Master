@@ -1,0 +1,21 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Trenes}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+En el problema se tienen varias líneas de trenes y cada línea tiene varias estaciones. Lo que se está intentando hacer es encontrar una ruta entre dos estaciones (no necesariamente en la misma línea) de forma que se minimice el número de estaciones intermedias usadas.
+
+Para resolverlo se modela como un problema de satisfacción de restricciones usando variables lógicas. Al final se imprime el resultado mostrando la dirección que se debe tomar del tren y se indica dónde tiene que transbordar para llegar al destino.
+
+La forma en la que yo lo hubiera resuleto sería modelando las líneas de tren con una gráfica y después aplicando una búsqueda por amplitud, con la raíz en la estación de origen. La búsqueda por amplitud garantiza que el número de nodos intermedios sea el menor posible.
+
+\end{document}
+

@@ -1,0 +1,103 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Tarea 3\\Lógica}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+\textbf{1.} (7.7)
+
+\begin{itemize}
+\item[a)] $B \lor C$: de los 4 estados posibles, solo hay uno que no es modelo ($B$:0 y $C$:0), así que tiene 3 modelos.
+\item[b)] $\lnot A \lor \lnot B \lor \lnot C \lor \lnot D$: De los 16 estados, solo uno no es modelo (cuando todos tienen valor 1). Por lo tanto, esta fórmula tiene 15 modelos.
+\item[c)] $(A \rightarrow B) \land A \land \lnot B \land C \land D$: Para tener modelos tendría que cumplirse $A:1$, $B:0$ y $\mathcal{I} (A \rightarrow B) = 1$, sin embargo eso no se puede. Por lo tanto, la fórmula tiene 0 modelos.
+\end{itemize}
+
+\textbf{2.} (7.4)
+
+\begin{itemize}
+\item[a)] \underline{Correcto.}
+\item[b)] \underline{Incorrecto.}
+\item[c)] \underline{Correcto.}
+\item[d)] \underline{Incorrecto.} En el estado $A:0$ y $B:0$ el antecedente es verdadero pero el consecuente es falso.
+\item[e)] \underline{Correcto.}
+\item[f)] \underline{Correcto.}
+\item[g)] \underline{Correcto.}
+\item[h)] \underline{Correcto.}
+\item[i)] \underline{Incorrecto.}  En el estado $A:1$, $B:0$, $D:1$, $E:0$ el antecedente es verdadero pero el consecuente es falso.
+\item[j)] \underline{Correcto.} La fórmula es satisfacible y el estado $A:1$, $B:0$ la hace verdadera.
+\item[k)] \underline{Correcto.} La fórmula es satisfacible y el estado $A:0$, $B:0$ la hace verdadera.
+\item[l)] \underline{Correcto.} La fórmula $(A \leftrightarrow B) \leftrightarrow C$ tiene 2 modelos. $A \leftrightarrow B$ tiene 4 modelos, y si se multiplica por los 2 estados que puede tener la variable $C$ se obtienen los 4 estados donde se hace verdadera la fórmula $A \leftrightarrow B$.
+\end{itemize}
+
+\textbf{3.} (7.18)
+
+\textbf{a)} La sentencia es válida.
+
+\textbf{b)}
+
+Sea $A = (f \rightarrow p) \lor (d \rightarrow p)$ y sea $B = f \land d \rightarrow p$.
+
+$\bullet (f \rightarrow p) \lor (d \rightarrow p) \equiv (\lnot f \lor p) \lor (\lnot d \lor p) \equiv \lnot f \lor \lnot d \lor p$
+
+$\bullet f \land d \rightarrow p \equiv \lnot (f \land d) \lor p \equiv \lnot f \lor \lnot d \lor p$
+
+Se observa que la FNC de $A$ es equivalente a la FNC de $B$, por lo que el argumento $A \rightarrow B$ es válido.
+
+\textbf{c)}
+
+El argumento $A \rightarrow B$ es válido si y sólo si $A \land \lnot B$ es insatisfacible. Se hará resolución binaria con $A = \lnot f \lor \lnot d \lor p$ y $\lnot B = f \land b \land \lnot p$.
+
+\begin{itemize}
+\item[1)] $\lnot f \lor \lnot d \lor p$
+\item[2)] $f$
+\item[3)] $d$
+\item[4)] $\lnot p$
+\item[5)] $\lnot d \lor p,$ Res(1, 2)
+\item[6)] $p,$ Res(3, 5)
+\item[7)] $\square,$ Res(4, 6)
+\end{itemize}
+
+Como se obtiene cláusula vacía, la fórmula $A \land \lnot B$ es insatisfacible y por lo tanto el argumento $A \rightarrow B$ es válido.
+
+\textbf{4.} (8.19)
+
+\begin{itemize}
+\item[a)] $\exists x (Parent(Joan, x) \land Female(x))$
+\item[b)] $\exists^1 x (Parent(Joan, x) \land Female(x))$
+\item[c)] $\exists^1 x (Parent(Joan, x) \land Female(x)) \land \lnot \exists y (Parent(Joan, y) \land \lnot Female(y))$
+\item[d)] $\forall x \forall y (Parent(Joan, x) \land Parent(Kevin, y) \rightarrow x=y)$
+\item[e)] $\exists x (Parent(Kevin, x) \land Parent(Joan, x)) \land \forall y \forall z (Parent(y,z) \land Kevin \neq y \rightarrow \lnot Parent(Joan, z))$
+\end{itemize}
+
+\textbf{5.} (8.10)
+
+\begin{itemize}
+\item[a)] $Occupation(Emily, Surgeon) \lor Occupation(Emily, Lawyer)$
+\item[b)] $Occupation(Joe, Actor) \land \exists x (Occupation(Joe, x) \land x \neq Actor)$
+\item[c)] $\forall x (Occupation(x, Surgeon) \rightarrow Occupation(x, Doctor))$
+\item[d)] $\lnot \exists x (Occupation(x, Lawyer) \land Customer(Joe, x))$
+\item[e)] $\exists x (Boss(x, Emily) \land Occupation(x, Lawyer))$
+\item[f)] $\exists x (Occupation(x, Lawyer) \rightarrow \forall y (Customer(y,x) \rightarrow Occupation(y, Doctor)))$
+\item[g)] $\forall x \exists y (Occupation(x, Surgeon) \land Occupation(y, Lawyer) \rightarrow Customer(x, y))$
+\end{itemize}
+
+\textbf{6.} (9.6)
+
+\begin{itemize}
+\item[a)] $\forall x (Horse(x) \rightarrow Mammal(x))$, $\forall x (Cow(x) \rightarrow Mammal(x))$, $\forall x (Pig(x) \rightarrow Mammal(x))$
+\item[b)] $\forall x \forall y (Horse(x) \land Offspring(y, x) \rightarrow Horse(y))$
+\item[c)] $Horse(Bluebeard)$
+\item[d)] $Parent(Bluebeard, Charlie)$
+\item[e)] $\forall x \forall y (Offspring(x, y) \rightarrow Parent(y, x))$, $\forall x \forall y (Parent(y, x) \rightarrow Offspring(x, y))$
+\item[f)] $\forall x (Mammal(x) \rightarrow \exists y Parent(y, x))$
+\end{itemize}
+
+\end{document}
+

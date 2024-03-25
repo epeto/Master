@@ -1,0 +1,136 @@
+
+\documentclass{article}
+\usepackage[spanish]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+\usepackage{amssymb, amsmath, amsbsy, wasysym}
+\usepackage{multirow} % para tablas
+\usepackage{graphicx}
+\usepackage[ruled, vlined, spanish, linesnumbered]{algorithm2e} %Para escribir algoritmos
+\title{Ejercicio 1\\Lógica computacional}
+\author{Emmanuel Peto Gutiérrez}
+\begin{document}
+\maketitle
+
+\textbf{1.}
+
+\textbf{a)}
+
+Sean $A$ y $B$ fórmulas, y sea $p$ una variable proposicional. Se define $eln$ recursivamente de la siguiente manera:\\
+$eln(\top) = \top$\\
+$eln(\bot) = \bot$\\
+$eln(p) = p$\\
+$eln(\lnot A) = (eln(A) \rightarrow \bot)$\\
+$eln(A \star B) = eln(A) \star eln(B)$, donde $\star \in \{\rightarrow, \land, \lor, \leftrightarrow\}$\\
+$eln((A)) = (eln(A))$
+
+\vspace{5mm}
+
+\textbf{b)}
+
+$eln(\lnot p \land \lnot (q \lor r))$\\
+$ = eln(\lnot p) \land eln(\lnot (q \lor r))$\\
+$ = (eln(p) \rightarrow \bot) \land (eln((q \lor r)) \rightarrow \bot)$\\
+$ = (p \rightarrow \bot) \land ((eln(q \lor r)) \rightarrow \bot)$\\
+$ = (p \rightarrow \bot) \land ((eln(q) \lor eln(r)) \rightarrow \bot)$\\
+$ = (p \rightarrow \bot) \land ((q \lor r) \rightarrow \bot)$
+
+\vspace{5mm}
+
+\textbf{c)}
+
+La relación es que $\mathcal{I}$ es modelo de $A$ si y sólo si $\mathcal{I}$ es modelo de $eln(A)$. Esto se debe a que $\lnot A \equiv A \rightarrow \bot$, lo cual se puede comprobar mediante sus tablas de verdad:\\
+
+\begin{tabular}{|c|c|}
+\hline
+$A$ & $\lnot A$ \\ \hline
+0 & 1 \\ \hline
+1 & 0 \\ \hline
+\end{tabular}
+\hspace{5mm}
+\begin{tabular}{|c|c|}
+\hline
+$A$ & $A \rightarrow \bot$ \\ \hline
+0 & 1 \\ \hline
+1 & 0 \\ \hline
+\end{tabular}
+
+\vspace{5mm}
+
+\rule{11.5cm}{0.1mm}
+
+\textbf{2.}
+
+Se usará el método indirecto para demostrar que el siguiente argumento es correcto:
+
+$(s \rightarrow p) \lor (t \rightarrow q) / \therefore (s \rightarrow q) \lor (t \rightarrow p)$
+
+Es decir, para demostrar la correctitud del argumento $\Gamma / \therefore A$, se mostrará que el conjunto $\Gamma \cup \{ \lnot A \}$ es insatisfacible.
+
+$\Gamma \cup \{ \lnot A \} = \{ (s \rightarrow p) \lor (t \rightarrow q), \lnot ((s \rightarrow q) \lor (t \rightarrow p)) \}$
+
+Para simplificar, se pasará la fórmula $\lnot ((s \rightarrow q) \lor (t \rightarrow p))$ a su equivalente en forma normal negativa.\\
+$\lnot ((s \rightarrow q) \lor (t \rightarrow p))$\\
+$\equiv \lnot (s \rightarrow q) \land \lnot (t \rightarrow p)$\\
+$\equiv s \land \lnot q \land t \land \lnot p$
+
+Así, hay que mostrar que el conjunto de fórmulas\\
+$\{ (s \rightarrow p) \lor (t \rightarrow q), s \land \lnot q \land t \land \lnot p \}$\\
+es insatisfacible.
+
+Sea $\mathcal{I}$ una interpretación tal que $\mathcal{I} (s \land \lnot q \land t \land \lnot p) = 1$. Entonces
+
+\begin{itemize}
+\item $\mathcal{I}(s) = 1$
+\item $\mathcal{I}(\lnot q) = 1 \Rightarrow \mathcal{I}(q) = 0$
+\item $\mathcal{I}(t) = 1$
+\item $\mathcal{I}(\lnot p) = 1 \Rightarrow \mathcal{I}(p) = 0$
+\end{itemize}
+
+Con esto se tiene que sólo existe una asignación de valores a las variables $s$, $q$, $t$ y $p$ tal que $\mathcal{I} (s \land \lnot q \land t \land \lnot p) = 1$. Pero con esta asignación $\mathcal{I}(s \rightarrow p) = 0$, $\mathcal{I}(t \rightarrow q) = 0$ y entonces $\mathcal{I}((s \rightarrow p) \lor (t \rightarrow q)) = 0$. Por lo que no existe un estado $\mathcal{I}$ tal que $\mathcal{I}((s \rightarrow p) \lor (t \rightarrow q)) = 1$ y $\mathcal{I}(s \land \lnot q \land t \land \lnot p) = 1$, y por lo tanto el conjunto $\Gamma \cup \{ \lnot A \} = \{ (s \rightarrow p) \lor (t \rightarrow q), s \land \lnot q \land t \land \lnot p \}$ es insatisfacible. $\blacksquare$
+
+\vspace{5mm}
+
+Se usará el método directo para demostrar la correctitud del argumento
+
+$p \land q$, $r \land \lnot s$, $q \rightarrow p \rightarrow t$, $t \rightarrow \lnot (\lnot s \rightarrow w) \rightarrow \lnot r$ $/ \therefore w$
+
+Es decir, que dada una $\mathcal{I}$ tal que $\mathcal{I}(F) = 1, \forall F \in \Gamma$, se concluye que $\mathcal{I}(w) = 1$.\\
+1) $\mathcal{I} (p \land q) = 1$\\
+2) $\mathcal{I} (r \land \lnot s) = 1$\\
+3) $\mathcal{I} (q \rightarrow p \rightarrow t) = 1$\\
+4) $\mathcal{I} (t \rightarrow \lnot (\lnot s \rightarrow w) \rightarrow \lnot r) = 1$\\
+5) $\mathcal{I} (p) = 1$, por 1)\\
+6) $\mathcal{I} (q) = 1$, por 1)\\
+7) $\mathcal{I} (r) = 1$, por 2)\\
+8) $\mathcal{I} (\lnot s) = 1$, por 2)\\
+9) $\mathcal{I} (s) = 0$, por 8)\\
+10) $\mathcal{I} (p \rightarrow t) = 1$, por 3) y 6)\\
+11) $\mathcal{I} (t) = 1$, por 5) y 10)\\
+12) $\mathcal{I} (\lnot (\lnot s \rightarrow w) \rightarrow \lnot r) = 1$, por 4) y 11)\\
+13) $\mathcal{I} (\lnot r) = 0$, por 7)\\
+14) $\mathcal{I} (\lnot (\lnot s \rightarrow w)) = 0$, por 12) y 13)\\
+15) $\mathcal{I} (\lnot s \rightarrow w) = 1$, por 14)\\
+16) $\mathcal{I} (w) = 1$, por 8) y 15) $\blacksquare$
+
+\vspace{5mm}
+
+\rule{11.5cm}{0.1mm}
+
+\textbf{3.}
+
+Para demostrar que las fórmulas son equivalentes, se tomará la fórmula $p \lor q \rightarrow p \lor r$ y se aplicarán reglas de equivalencia hasta llegar a $p \lor (q \rightarrow r)$.
+
+$p \lor q \rightarrow p \lor r$\\
+$\equiv \lnot (p \lor q) \lor (p \lor r)$, por eliminación del conectivo $\rightarrow$\\
+$\equiv (\lnot p \land \lnot q) \lor (p \lor r)$, por De Morgan\\
+$\equiv (p \lor r) \lor (\lnot p \land \lnot q)$, por conmutatividad de $\lor$\\
+$\equiv (p \lor r \lor \lnot p) \land (p \lor r \lor \lnot q)$, por distributividad y asociatividad\\
+$\equiv (p \lor \lnot p \lor r) \land (p \lor \lnot q \lor r)$, por conmutatividad de $\lor$\\
+$\equiv ((p \lor \lnot p) \lor r) \land (p \lor (\lnot q \lor r))$, por asociatividad\\
+$\equiv (\top \lor r) \land (p \lor (\lnot q \lor r))$, por tercer excluido\\
+$\equiv \top \land (p \lor (\lnot q \lor r))$, por dominancia\\
+$\equiv p \lor (\lnot q \lor r)$, por neutralidad\\
+$\equiv p \lor (q \rightarrow r)$, por eliminación del conectivo $\lor$. $\blacksquare$
+
+\end{document}
+
